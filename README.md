@@ -1,6 +1,13 @@
 ## ProjectGroup-6
 #### Team Members </br> 1. Anurag Patro </br> 2. Bhumika Tiwari </br> 3. Hetal Shah </br> 4. Narisht Dhyani
 
+NOT APPROVED - here I am giving you a project:
+
+### Divyang - Hiring portal for people with disabilities (make it india specific)
+take inspiration from https://abilityjobs.com/ and 
+look at the govt policy https://www.dol.gov/odep/ you will have to find the corresponding policy for India and embed into you app...
+
+
 ### 1. Title: Digital Citizenship
 __Problem__: Everyday millions of people get trolled/abused online. Online bulling is depressingly common and everyday several stories about trolling are frequently in news. Is this the kind of digital footprint we would want to leave for the present and upcoming generations? Is there any solution to dealing with trolls and abuse? Can technology help us with this?
 
