@@ -6,8 +6,8 @@
 ### Divyang - Hiring portal for people with disabilities  (india specific)
 
 __Abstract:__ 
-A Job portal which aggregates different jobs from online platforms and classifys them based upon the government  policy for disable people. It also is portal for employers where they can post.
-
+People with disabilities (PWD) faces lots of challenges in their day to day life, one of the biggest challenges they face is employment. The average employment rate of PWD in India is 0.28 percent in the private sector and 0.54 percent in the public sector. Findings of the World Bank Report ‘People with Disabilities in India: From Commitments to Outcomes’ released in 2007, suggest that the employment rate of disabled people has actually fallen from 42.7% in 1991 down to 37.6 % in 2002. The International Labour Organization (ILO)'s 2011 report 'Persons with Disability and The India Labour Market: Challenges and Opportunities' states that 73.6% of the disabled in India are still outside the labour force.
+One of the major reasons of the above-mentioned challenges is unavailability of dedicated platform of job search for PWD. There is a dire need of one platform for PWD where employers can post jobs for them. This would facilitate the PWD in finding relevant job postings and apply to the ones that they find of their interest.
 
 __Proposed solution:__
 Job searching is hard enough, but even more so when you have a disability. Fortunately, we are here to 
