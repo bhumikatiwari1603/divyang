@@ -36,6 +36,10 @@ module.exports = db.sequelize.define(
       type: Sequelize.STRING(20),
       defaultValue : null
     },
+    company: {
+      type: Sequelize.STRING(200),
+      defaultValue: null
+    },
     orgn_type: {
       type: Sequelize.STRING(200),
       defaultValue: null
