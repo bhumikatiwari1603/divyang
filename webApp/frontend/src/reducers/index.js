@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducer";
+import profileReducer from "./profileReducer";
 import errorReducer from "./errorReducer";
 import successReducer from "./successReducer";
 import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../actions/types";
@@ -7,6 +8,7 @@ import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../action
 
 const appReducer = combineReducers({
   auth: authReducer,
+  profile:profileReducer,
   errors: errorReducer,
   success: successReducer
 });

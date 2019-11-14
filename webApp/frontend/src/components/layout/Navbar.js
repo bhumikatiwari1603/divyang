@@ -33,7 +33,14 @@ class Navbar extends Component {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     
                             <ul className="navbar-nav ml-auto">
-                                   
+                                    <li className="nav-item active">
+                                      {user.type_of_user=='employer' &&
+                                        <Link className="nav-link text-dark" to="dashboardEmployer">Home <span className="sr-only">(current)</span></Link>
+                                      }
+                                      {user.type_of_user=='user' &&
+                                        <Link className="nav-link text-dark" to="dashboard">Home <span className="sr-only">(current)</span></Link>
+                                      }  
+                                    </li>
                                   <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Hi,{user.first_name}!
@@ -42,7 +49,7 @@ class Navbar extends Component {
                                       {user.type_of_user=='user' &&
                                          <a className="dropdown-item" href="profileUser">Profile</a>
                                       }
-                                      {user.type_of_user=='owner' &&
+                                      {user.type_of_user=='employer' &&
                                          <a className="dropdown-item" href="/profileEmployer">Profile</a>
                                       }   
                                       <div className="dropdown-divider"></div>

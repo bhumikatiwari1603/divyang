@@ -33,10 +33,10 @@ class Login extends Component {
 
     if (this.props.auth.isAuthenticated) {
        
-      if(this.props.auth.user.type_of_user=='owner')
+      if(this.props.auth.user.type_of_user=='user')
            this.props.history.push("/dashboard");
       else
-           this.props.history.push("/dashboardBuyer");    
+           this.props.history.push("/dashboardEmployer");    
     }
     
   }
@@ -45,10 +45,10 @@ class Login extends Component {
   
     if (nextProps.auth.isAuthenticated) {
 
-      if(nextProps.auth.user.type_of_user=='owner')
+      if(nextProps.auth.user.type_of_user=='user')
            nextProps.history.push("/dashboard");
       else
-           nextProps.history.push("/dashboardBuyer");
+           nextProps.history.push("/dashboardEmployer");
     
     }
 
@@ -83,8 +83,6 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     
-    //this.setState({errors:"",success:""});
-    //return false;
     const userData = {
       email: this.state.email,
       password: this.state.password

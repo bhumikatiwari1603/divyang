@@ -8,10 +8,10 @@ class Landing extends Component {
   componentDidMount(){
     if (this.props.auth.isAuthenticated) {
 
-      if(this.props.auth.user.type_of_user=='owner')
+      if(this.props.auth.user.type_of_user=='user')
            this.props.history.push("/dashboard");
       else
-           this.props.history.push("/dashboardRecruiter"); 
+           this.props.history.push("/dashboardEmployer"); 
     }
   }
   
@@ -23,7 +23,7 @@ class Landing extends Component {
       if(nextProps.auth.user.type_of_user=='user')
             nextProps.history.push("/dashboard");
       else
-            nextProps.history.push("/dashboardRecruiter"); 
+            nextProps.history.push("/dashboardEmployer"); 
     }
 
   }

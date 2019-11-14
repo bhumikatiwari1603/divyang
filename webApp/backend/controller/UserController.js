@@ -121,7 +121,8 @@ exports.getUserProfile = (req,res)=>{
                                         phone_num:user.dataValues.phone_num,
                                         profile_img_file_name:user.dataValues.profile_img_file_name,
                                         address : user.dataValues.address,
-                                        d_o_b   : user.dataValues.d_o_b
+                                        d_o_b   : user.dataValues.d_o_b,
+                                        phone_num: user.dataValues.phone_num 
                                        };
                     
                     res.status(200).json({error:false,message:"User Profile Details...",userDetails:userDetails});
@@ -138,7 +139,7 @@ exports.getUserProfile = (req,res)=>{
 
 //Edit User Profile Details
 exports.editUserProfile = (req,res)=>{
-    console.log("hello...",req.body);
+    
     req.body.type_of_user = req.payLoad.type_of_user;
 
     
@@ -148,7 +149,7 @@ exports.editUserProfile = (req,res)=>{
                     email: req.body.email,
                     phone_num : req.body.phone_num,
                     profile_img_file_name : req.body.profile_img_file_name,
-                    address : user.dataValues.address
+                    address : req.body.address
                 }
         
             userModel.count({
@@ -164,12 +165,11 @@ exports.editUserProfile = (req,res)=>{
                                               where: { id: req.payLoad.id } 
                                              })  
                                             .then(updatedProfile => {
-                                            
                                                 return res.status(200).json({error:false,message:"Data Successfully Updated..."});
                                             
                                             })
                                             .catch(err=>{
-                                                //console.log("Error is ",err);
+                                                
                                                 return res.status(500).json({ error:true,message:err.message});     
                                             });
                          
@@ -178,6 +178,7 @@ exports.editUserProfile = (req,res)=>{
                 }
             })
             .catch(err => {
+              
                 return res.status(400).json({ error:true,message: err.message});
             });
           
