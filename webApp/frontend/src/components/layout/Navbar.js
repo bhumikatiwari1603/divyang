@@ -41,6 +41,17 @@ class Navbar extends Component {
                                         <Link className="nav-link text-dark" to="dashboard">Home <span className="sr-only">(current)</span></Link>
                                       }  
                                     </li>
+                                    {user.type_of_user=='user' &&
+                                       <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Disabilities
+                                            </a>
+                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
+                                              <a className="dropdown-item" href="allDisabilities">View</a>
+                                              <a className="dropdown-item" href="addDisability">Add</a>
+                                            </div>
+                                     </li>
+                                    }
                                   <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Hi,{user.first_name}!

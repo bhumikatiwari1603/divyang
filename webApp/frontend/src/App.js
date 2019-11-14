@@ -19,6 +19,11 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import ProfileUser from "./components/profile/ProfileUser";
 
+import DisabilityAdd from "./components/disabilities/DisabilityAdd";
+import DisabilityView from "./components/disabilities/DisabilityView";
+import DisabilityEdit from "./components/disabilities/DisabilityEdit";
+
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -53,6 +58,9 @@ class App extends Component {
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/profileUser" component={ProfileUser} />
+              <PrivateRoute exact path="/addDisability" component={DisabilityAdd} />
+              <PrivateRoute exact path="/allDisabilities" component={DisabilityView} />
+              <PrivateRoute exact path="/editDisability" component={DisabilityEdit} />
           </Switch>
         </div>
       </Router>
