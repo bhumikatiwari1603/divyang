@@ -52,6 +52,39 @@ class Navbar extends Component {
                                             </div>
                                      </li>
                                     }
+                                    {user.type_of_user=='user' &&
+                                       <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Skills
+                                            </a>
+                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
+                                              <a className="dropdown-item" href="allSkills">View</a>
+                                              <a className="dropdown-item" href="addSkill">Add</a>
+                                            </div>
+                                     </li>
+                                    }
+                                    {user.type_of_user=='user' &&
+                                       <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Qualifications
+                                            </a>
+                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
+                                              <a className="dropdown-item" href="allqualifications">View</a>
+                                              <a className="dropdown-item" href="addQualification">Add</a>
+                                            </div>
+                                     </li>
+                                    }
+                                    {user.type_of_user=='user' &&
+                                       <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Employment
+                                            </a>
+                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
+                                              <a className="dropdown-item" href="allEmployments">View</a>
+                                              <a className="dropdown-item" href="addEmployment">Add</a>
+                                            </div>
+                                     </li>
+                                    }
                                   <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Hi,{user.first_name}!

@@ -23,6 +23,18 @@ import DisabilityAdd from "./components/disabilities/DisabilityAdd";
 import DisabilityView from "./components/disabilities/DisabilityView";
 import DisabilityEdit from "./components/disabilities/DisabilityEdit";
 
+import SkillAdd from "./components/skills/SkillAdd";
+import SkillView from "./components/skills/SkillView";
+import SkillEdit from "./components/skills/SkillEdit";
+
+import QualificationAdd from "./components/qualifications/QualificationAdd";
+import QualificationView from "./components/qualifications/QualificationView";
+import QualificationEdit from "./components/qualifications/QualificationEdit";
+
+import EmploymentAdd from "./components/employments/EmploymentAdd";
+import EmploymentView from "./components/employments/EmploymentView";
+import EmploymentEdit from "./components/employments/EmploymentEdit";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -58,9 +70,23 @@ class App extends Component {
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/profileUser" component={ProfileUser} />
+
               <PrivateRoute exact path="/addDisability" component={DisabilityAdd} />
               <PrivateRoute exact path="/allDisabilities" component={DisabilityView} />
               <PrivateRoute exact path="/editDisability" component={DisabilityEdit} />
+
+              <PrivateRoute exact path="/addSkill" component={SkillAdd} />
+              <PrivateRoute exact path="/allSkills" component={SkillView} />
+              <PrivateRoute exact path="/editSkill" component={SkillEdit} />
+
+              <PrivateRoute exact path="/addQualification" component={QualificationAdd} />
+              <PrivateRoute exact path="/allQualifications" component={QualificationView} />
+              <PrivateRoute exact path="/editQualification" component={QualificationEdit} />
+
+              <PrivateRoute exact path="/addEmployment" component={EmploymentAdd} />
+              <PrivateRoute exact path="/allEmployments" component={EmploymentView} />
+              <PrivateRoute exact path="/editEmployment" component={EmploymentEdit} />
+
           </Switch>
         </div>
       </Router>

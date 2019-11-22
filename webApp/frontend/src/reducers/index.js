@@ -2,6 +2,9 @@ import { combineReducers } from "redux";
 import authReducer from "./authReducer";
 import profileReducer from "./profileReducer";
 import disabilityReducer from "./disabilityReducer";
+import skillReducer from "./skillReducer";
+import qualificationReducer from "./qualificationReducer";
+import employmentReducer from "./employmentReducer";
 import errorReducer from "./errorReducer";
 import successReducer from "./successReducer";
 import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../actions/types";
@@ -11,6 +14,9 @@ const appReducer = combineReducers({
   auth: authReducer,
   profile:profileReducer,
   disabilities:disabilityReducer,
+  skills:skillReducer,
+  qualifications:qualificationReducer,
+  employments:employmentReducer,
   errors: errorReducer,
   success: successReducer
 });
