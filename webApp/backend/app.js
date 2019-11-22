@@ -9,8 +9,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/indexRoute');
 var usersRouter = require('./routes/usersRoute');
 var disabilitiesRouter = require('./routes/disabilitiesRoute');
-var fileHandlingRouter = require('./routes/fileHandlingRoute');
-
+var skillRouter = require('./routes/skillsRoute');
+var qualificationRouter = require('./routes/qualificationsRoute');
 
 var app = express();
 
@@ -29,11 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
 
-app.use(cors({ origin: 'http://localhost:3009 ', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000 ', credentials: true }));
 
 //Allow Access Control
 app.use(function(req, res, next) {//http://localhost:3009
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3009');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
@@ -51,8 +51,8 @@ app.use(function(req, res, next) {//http://localhost:3009
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/disabilities', disabilitiesRouter);
-app.use('/fileHandling',fileHandlingRouter);
-
+app.use('/skills',skillRouter);
+app.use('/qualifications',qualificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
