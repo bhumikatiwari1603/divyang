@@ -42,6 +42,7 @@ import OpeningAdd from "./components/openings/OpeningAdd";
 import OpeningView from "./components/openings/OpeningView";
 import OpeningEdit from "./components/openings/OpeningEdit";
 import ArchivedOpeningView from "./components/openings/ArchivedOpeningView";
+import OpeningAll from "./components/openings/OpeningAll";
 
 
 // Check for token to keep user logged in
@@ -99,9 +100,10 @@ class App extends Component {
               <PrivateRoute exact path="/editEmployment" component={EmploymentEdit} />
 
               <PrivateRoute exact path="/addOpening" component={OpeningAdd} />
-              <PrivateRoute exact path="/allOpenings" component={OpeningView} />
+              <PrivateRoute exact path="/myAllOpenings" component={OpeningView} />
               <PrivateRoute exact path="/editOpening" component={OpeningEdit} />
               <PrivateRoute exact path="/allArchivedOpenings" component={ArchivedOpeningView} />
+              <PrivateRoute exact path="/allOpenings" component={OpeningAll} />
 
           </Switch>
         </div>

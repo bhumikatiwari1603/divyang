@@ -100,7 +100,7 @@ class Navbar extends Component {
                                               Job Openings
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
-                                              <a className="dropdown-item" href="allOpenings">View</a>
+                                              <a className="dropdown-item" href="myAllOpenings">View</a>
                                               <a className="dropdown-item" href="addOpening">Add</a>
                                             </div>
                                      </li>

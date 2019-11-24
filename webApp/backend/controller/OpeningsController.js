@@ -180,3 +180,42 @@ console.log("Resuly ",result);
 
 }
 
+//For User
+
+exports.getAllOpenedOpenings = (req, res) => {
+  console.log("Hello Body", req.body);
+  openingModel.findAll({
+                            where : {
+                                    job_status : 'open'
+                                    }
+                              })
+                              .then(result =>{
+
+                                return res.send({ error: false,message:"Openings...",result:result })
+                              
+                              })
+                              .catch(err => {
+                                //res.end('error: ' + err)
+                                return res.status(500).send({ error: true,message:err });
+                            });
+
+}
+
+exports.getAllOpenedOpeningsCount = (req, res) => {
+
+openingModel.count({
+            where : {
+                    job_status : 'open'
+                    }
+              })
+              .then(result =>{
+
+                return res.send({ error: false,message:"Openings...",result:result })
+              
+              })
+              .catch(err => {
+                //res.end('error: ' + err)
+                return res.status(500).send({ error: true,message:err });
+            });
+
+}

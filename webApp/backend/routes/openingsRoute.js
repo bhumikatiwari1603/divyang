@@ -23,4 +23,10 @@ router.get('/myClosedOpenings',middleware.verifyToken,openingsController.getMyAl
 router.get('/myClosedOpeningsCount',middleware.verifyToken,openingsController.getMyAllClosedOpeningsCount);
 
 
+//All Opened openings
+router.get('/allOpenings',middleware.verifyToken,openingsController.getAllOpenedOpenings);
+
+//All Opened openings count
+router.get('/allOpeningsCount',middleware.verifyToken,openingsController.getAllOpenedOpeningsCount);
+
 module.exports = router;

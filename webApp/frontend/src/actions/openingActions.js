@@ -199,3 +199,61 @@ export const updateMyOpening = (data, history) => dispatch => {
     );
 };
 
+//For User
+// Get All Opened Openings
+export const getAllOpenings = (history) => dispatch => {
+  axios
+    .get("openings/allOpenings")
+    .then(res => {
+                  dispatch({
+                    type: FETCH_OPENINGS,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
+    }
+    );
+};
+
+// Get All My Open Openings
+export const getAllOpeningsCount = (history) => dispatch => {
+  axios
+    .get("openings/allOpeningsCount")
+    .then(res => {
+                  dispatch({
+                    type: FETCH_OPENINGS_COUNT,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
+    }
+    );
+};

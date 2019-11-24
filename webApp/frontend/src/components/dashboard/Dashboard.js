@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { getAllOpeningsCount} from "../../actions/openingActions";
 import './Dashboard.scss';
 
 class Dashboard extends Component {
+
+  componentWillMount(){
+
+    this.props.getAllOpeningsCount();
+  }
+
     onLogoutClick = e => {
       e.preventDefault();
       this.props.logoutUser();
@@ -12,6 +19,9 @@ class Dashboard extends Component {
     
     render() {
       const { user } = this.props.auth;
+
+      let openingsCount =0;
+      openingsCount = this.props.openingsCount.result;
       
       return (
         <div style={{ height: "75vh" }} className="container valign-wrapper">
@@ -45,13 +55,13 @@ class Dashboard extends Component {
                   
                         <div class="small-box bg-warning">
                               <div class="inner text-white">
-                                    <h3>10</h3>
+                                 <h3>{openingsCount}</h3>
                                     <h4>Current Openings</h4>
                               </div>
                               <div class="icon">
                                     <i class="fa fa-tachometer"></i>
                               </div>
-                            <a class="small-box-footer" href="#">More info<i class="fa fa-arrow-circle-right"></i></a> 
+                            <a class="small-box-footer" href="allOpenings">More info<i class="fa fa-arrow-circle-right"></i></a> 
                         </div>
                 </div>
 
@@ -65,15 +75,17 @@ class Dashboard extends Component {
   }
   
   Dashboard.propTypes = {
+    getAllOpeningsCount : PropTypes.func.isRequired, 
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
   };
   
   const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    openingsCount:state.openingsCount
   });
   
   export default connect(
     mapStateToProps,
-    { logoutUser }
+    { logoutUser,getAllOpeningsCount }
   )(Dashboard);
