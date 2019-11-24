@@ -32,7 +32,7 @@ module.exports = db.sequelize.define(
     job_status: {
       type: Sequelize.ENUM,
       values:['open','close'],
-      defaultValue:'user'
+      defaultValue:'open'
     },
     closing_dt: {
       type: Sequelize.DATEONLY,

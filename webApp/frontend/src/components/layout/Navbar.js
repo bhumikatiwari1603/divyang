@@ -93,6 +93,19 @@ class Navbar extends Component {
                                             </div>
                                      </li>
                                     }
+
+                                  {user.type_of_user=='employer' &&
+                                       <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Job Openings
+                                            </a>
+                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
+                                              <a className="dropdown-item" href="allOpenings">View</a>
+                                              <a className="dropdown-item" href="addOpening">Add</a>
+                                            </div>
+                                     </li>
+                                    }
+
                                   <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Hi,{user.first_name}!

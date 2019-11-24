@@ -38,6 +38,10 @@ import EmploymentAdd from "./components/employments/EmploymentAdd";
 import EmploymentView from "./components/employments/EmploymentView";
 import EmploymentEdit from "./components/employments/EmploymentEdit";
 
+import OpeningAdd from "./components/openings/OpeningAdd";
+import OpeningView from "./components/openings/OpeningView";
+import OpeningEdit from "./components/openings/OpeningEdit";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -92,6 +96,10 @@ class App extends Component {
               <PrivateRoute exact path="/addEmployment" component={EmploymentAdd} />
               <PrivateRoute exact path="/allEmployments" component={EmploymentView} />
               <PrivateRoute exact path="/editEmployment" component={EmploymentEdit} />
+
+              <PrivateRoute exact path="/addOpening" component={OpeningAdd} />
+              <PrivateRoute exact path="/allOpenings" component={OpeningView} />
+              <PrivateRoute exact path="/editOpening" component={OpeningEdit} />
 
           </Switch>
         </div>

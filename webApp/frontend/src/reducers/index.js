@@ -5,6 +5,7 @@ import disabilityReducer from "./disabilityReducer";
 import skillReducer from "./skillReducer";
 import qualificationReducer from "./qualificationReducer";
 import employmentReducer from "./employmentReducer";
+import openingReducer from "./openingReducer";
 import errorReducer from "./errorReducer";
 import successReducer from "./successReducer";
 import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../actions/types";
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
   skills:skillReducer,
   qualifications:qualificationReducer,
   employments:employmentReducer,
+  openings : openingReducer,
   errors: errorReducer,
   success: successReducer
 });

@@ -104,7 +104,8 @@ exports.getAllOpenings = (req, res) => {
   
                   openingModel.findAll({
                                             where : {
-                                                    user_id: req.payLoad.id
+                                                    user_id: req.payLoad.id,
+                                                    job_status : 'open'
                                                     }
                                               })
                                               .then(result =>{
