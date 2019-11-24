@@ -100,7 +100,7 @@ exports.edit = (req,res)=>{
 
 }
 
-exports.getAllOpenings = (req, res) => {
+exports.getMyAllOpenedOpenings = (req, res) => {
   
                   openingModel.findAll({
                                             where : {
@@ -120,5 +120,63 @@ exports.getAllOpenings = (req, res) => {
       
 }
 
+exports.getMyAllOpenedOpeningsCount = (req, res) => {
+  
+  openingModel.count({
+                            where : {
+                                    user_id: req.payLoad.id,
+                                    job_status : 'open'
+                                    }
+                              })
+                              .then(result =>{
 
+                                return res.send({ error: false,message:"Openings...",result:result })
+                              
+                              })
+                              .catch(err => {
+                                //res.end('error: ' + err)
+                                return res.status(500).send({ error: true,message:err });
+                            });
+
+}
+
+exports.getMyAllClosedOpenings = (req, res) => {
+  
+  openingModel.findAll({
+                            where : {
+                                    user_id: req.payLoad.id,
+                                    job_status : 'close'
+                                    }
+                              })
+                              .then(result =>{
+
+                                return res.send({ error: false,message:"Archived Openings...",result:result })
+                              
+                              })
+                              .catch(err => {
+                                //res.end('error: ' + err)
+                                return res.status(500).send({ error: true,message:err });
+                            });
+
+}
+
+exports.getMyAllClosedOpeningsCount = (req, res) => {
+
+openingModel.count({
+            where : {
+                    user_id: req.payLoad.id,
+                    job_status : 'close'
+                    }
+              })
+              .then(result =>{
+console.log("Resuly ",result);
+                return res.send({ error: false,message:"Archived Openings...",result:result })
+              
+              })
+              .catch(err => {
+                //res.end('error: ' + err)
+                return res.status(500).send({ error: true,message:err });
+            });
+
+}
 

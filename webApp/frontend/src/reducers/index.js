@@ -6,6 +6,9 @@ import skillReducer from "./skillReducer";
 import qualificationReducer from "./qualificationReducer";
 import employmentReducer from "./employmentReducer";
 import openingReducer from "./openingReducer";
+import closedOpeningReducer from "./closedOpeningReducer";
+import openingCountReducer from "./openingCountReducer";
+import closedOpeningCountReducer from "./closedOpeningCountReducer";
 import errorReducer from "./errorReducer";
 import successReducer from "./successReducer";
 import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../actions/types";
@@ -19,6 +22,9 @@ const appReducer = combineReducers({
   qualifications:qualificationReducer,
   employments:employmentReducer,
   openings : openingReducer,
+  closedOpenings : closedOpeningReducer,
+  openingsCount : openingCountReducer,
+  closedOpeningsCount : closedOpeningCountReducer,
   errors: errorReducer,
   success: successReducer
 });
