@@ -9,10 +9,10 @@ import {
 } from "./types";
 
 
-// Get All Sections
+// Get All Skills
 export const getAllSkills = (history) => dispatch => {
   axios
-    .get("disabilities/myDisabilities")
+    .get("skills/mySkills")
     .then(res => {
                   dispatch({
                     type: FETCH_SKILLS,
@@ -41,13 +41,13 @@ export const getAllSkills = (history) => dispatch => {
 // Add Skill
 export const addSkill = (data, history) => dispatch => {
   axios
-    .post("disabilities/disability",data)
+    .post("skills/skill",data)
     .then(res => {
                   dispatch({
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allDisabilities");
+                  history.push("/allSkills");
                  
                   /* dispatch({
                     type: UPDATED_USER_PROFILE,
@@ -76,16 +76,16 @@ export const addSkill = (data, history) => dispatch => {
 
 
 
-// Update Disability
+// Update Skill
 export const updateSkill = (data, history) => dispatch => {
   axios
-    .put(`disabilities/disability/${data.id}`,data)
+    .put(`skills/skill/${data.id}`,data)
     .then(res => {
                   dispatch({
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allDisabilities");
+                  history.push("/allSkills");
                   /*dispatch({
                     type: RESET_ERROR_STATE
                   });*/

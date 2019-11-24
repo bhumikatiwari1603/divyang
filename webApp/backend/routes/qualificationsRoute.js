@@ -10,7 +10,7 @@ router.put('/qualification/:id',middleware.verifyToken, qualifcationsController.
 
 router.get('/qualification/:id',middleware.verifyToken,qualifcationsController.getMyQualifications);
 
-router.get('/myQualification',middleware.verifyToken,qualifcationsController.getMyAllQualifications);
+router.get('/myQualifications',middleware.verifyToken,qualifcationsController.getMyAllQualifications);
 
 
 module.exports = router;

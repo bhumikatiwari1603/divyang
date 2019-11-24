@@ -84,7 +84,7 @@ class SkillAdd extends Component {
                                         id="name"
                                         type="text"
                                         placeholder="Skill Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="10"

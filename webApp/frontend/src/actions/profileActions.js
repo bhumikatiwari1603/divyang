@@ -80,7 +80,7 @@ export const userProfileUpdation = (userData, history) => dispatch => {
 };
 
 
-// Profile Owner
+// Profile Employer
 export const employerProfile = (history) => dispatch => {
   axios
     .get("users/employerProfile")
@@ -100,7 +100,7 @@ export const employerProfile = (history) => dispatch => {
       { 
         dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: ""//err
       })
       
       dispatch({

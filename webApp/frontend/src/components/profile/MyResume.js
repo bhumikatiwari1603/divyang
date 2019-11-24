@@ -2,21 +2,19 @@ import React, { Component } from "react";
 import { Link, withRouter  } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { userProfile,userProfileUpdation,userProfilePicUpload } from "../../actions/profileActions";
+import { userProfile } from "../../actions/profileActions";
+import { getAllDisabilities} from "../../actions/disabilityActions";
+import { getAllSkills} from "../../actions/skillActions";
+import { getAllQualifications} from "../../actions/qualificationActions";
+import { getAllEmploymentDetails} from "../../actions/employmentActions";
 import classnames from "classnames";
 import {API_URL} from "../../actions/url";
 
-class ProfileUser extends Component {
+class MyResume extends Component {
   constructor() {
     super();
     this.state = {
-      first_name: "",
-      last_name: "",
-      email: "",
-      profile_img_file_name:"",
-      phone_num: "",
-      selected_file : "",
-      address:"",
+      userDetails : {},
       errors: {},
       success:{}
     };
@@ -24,7 +22,10 @@ class ProfileUser extends Component {
   
   componentWillMount(){
     this.props.userProfile();
-    //console.log("User Details",this.props.profile);
+    this.props.getAllDisabilities();
+    this.props.getAllSkills();
+    this.props.getAllQualifications();
+    this.props.getAllEmploymentDetails();
 }
 
   componentWillReceiveProps(nextProps) {
@@ -32,14 +33,7 @@ class ProfileUser extends Component {
 
      if (Object.keys(nextProps.profile).length!=0) {
        const userDetails = nextProps.profile.userDetails; 
-      this.setState({
-              first_name: userDetails.first_name,
-              last_name: userDetails.last_name,
-              email: userDetails.email,
-              profile_img_file_name: userDetails.profile_img_file_name,
-              phone_num: userDetails.phone_num, 
-              address : userDetails.address,
-      });
+      
     }
 
     if (Object.keys(nextProps.errors).length!=0) {
@@ -67,17 +61,6 @@ class ProfileUser extends Component {
         document.getElementById('profile-user-msg-box').className = 'alert-success';
         document.getElementById('profile-user-msg-box').innerHTML = nextProps.success.message;
 
-        if((nextProps.success).hasOwnProperty('profileImageName')){
-                      this.setState({
-                        profile_img_file_name: nextProps.success.profileImageName,
-                        selected_file : "",
-                      })
-
-                      document.getElementById('profileImageLabel').innerHTML = "Choose file";
-                      
-        }
-        
-
       }
 
 
@@ -85,64 +68,72 @@ class ProfileUser extends Component {
 
   }
 
-  
-  onChange = e => {
-  
-    this.setState({ [e.target.id]: e.target.value });
-    
-    if(e.target.files!=null){
-
-      document.getElementById('profile-user-msg-box').style.display="none";
-      let img = document.getElementById('profileImagePath').value.split("\\").pop();
-      document.getElementById('profileImageLabel').innerHTML = img;
-           
-       this.setState({selected_file:e.target.files[0]});
-    }
-
-  };
-  
-  onSubmit = e => {
-    e.preventDefault();
-    
-    const userProfileDetails = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      email: this.state.email,
-      profile_img_file_name: this.state.profile_img_file_name,
-      phone_num: this.state.phone_num,
-      address  : this.state.address
-    };
-
-    /*this.setState({
-      success:"",
-      errors:{}
-    });*/
-    
-
-    this.props.userProfileUpdation(userProfileDetails, this.props.history); 
-  
-  };
-
-  onUploadProfilePic = e => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    
-      formData.append('file', this.state.profileImage);
-      
-      formData.append('profileImage', this.state.selected_file);
-      
-     /*const profilePicDetails = {
-           profileImage:this.state.profileImage
-     };*/
-    this.props.userProfilePicUpload(formData, this.props.history);
-  }
-  
-  
-
   render() { console.log("Hi",API_URL);
-    const { errors } = this.state;
-    //const {userDetails} = this.state; 
+    //const { errors } = this.state;
+    const { userDetails } = this.props.profile;
+    const { user } = this.props.auth;
+    console.log("User Details", userDetails);
+    console.log("User", user);
+    
+    let skillItems;
+    if((this.props.skills).hasOwnProperty('result')){
+      
+      skillItems = this.props.skills.result.map((item,index)=>(
+      <tr key ={item.id} id={"skill-row-"+item.id}>
+          <td>{index+1}</td>
+          <td>{item.name}</td>
+      </tr>
+   ));
+  
+  }
+
+  let disabilityItems;
+    if((this.props.disabilities).hasOwnProperty('result')){
+      
+      disabilityItems = this.props.disabilities.result.map((item,index)=>(
+      <tr key ={item.id} id={"disability-row-"+item.id}>
+          <td>{index+1}</td>
+          <td>{item.name}</td>
+      </tr>
+   ));
+  
+  }
+
+  let qualificationItems;
+    if((this.props.qualifications).hasOwnProperty('result')){
+      
+      qualificationItems = this.props.qualifications.result.map((item,index)=>(
+      <tr key ={item.id} id={"qualification-row-"+item.id}>
+          <td>{index+1}</td>
+          <td>{item.university_name}</td>
+          <td>{item.degree_level}</td>
+          <td>{item.qualification_name}</td>
+          <td>{item.start_dt}</td>
+          <td>{item.completion_dt}</td>
+      </tr>
+   ));
+  
+  }
+
+  let employmentItems;
+    if((this.props.employments).hasOwnProperty('result')){
+      
+      employmentItems = this.props.employments.result.map((item,index)=>(
+      <tr key ={item.id} id={"employment-row-"+item.id}>
+          <td>{index+1}</td>
+          <td>{item.orgn_name}</td>
+          <td>{item.designation}</td>
+          <td>{item.from_period}</td>
+          <td>{item.to_period}</td>
+
+          <td><Link to={{pathname:"/editEmployment",employmentId:item.id}} ><button className="btn btn-sm btn-primary edit">Edit</button></Link>&nbsp;
+          </td>
+      </tr>
+   ));
+  
+  }
+
+
     return (
       <div className="container p-4">
         <div className="row justify-content-center align-items-center h-100">
@@ -150,158 +141,178 @@ class ProfileUser extends Component {
            <h5 className="p-2" id="profile-user-msg-box" style={{display:'none'}}></h5>
            
               <div className="row">
-                <div className ="col-md-5 mx-auto bg-white p-3 border">
-                    
-                  <h5 className="p-2 text-center font-weight-bold">Profile</h5>
-                        <form onSubmit={this.onSubmit} autoComplete="off">
-                          <div className="row">
-                              <div className="col-md-6">
-                                    <div className="form-group">
-                                     <div>
-								                         <span className="text-light-black">First Name</span>
-							                       </div>
-                                      <input
-                                        onChange={this.onChange}
-                                        value={this.state.first_name}
-                                        error={errors.first_name}
-                                        id="first_name"
-                                        type="text"
-                                        placeholder="First Name"
-                                        required
-                                        className={classnames("form-control", {
-                                          invalid: errors.first_name
-                                        })}
-                                      />
-                                      {/* <span className="glyphicon glyphicon-envelope form-control" htmlFor="name">First Name</span>
-                                      <span className="red-text">{errors.first_name}</span> */}
-                                    </div>
-                                  </div> 
-                                  <div className="col-md-6">
-                                      <div>
-								                         <span className="text-light-black">Last Name</span>
-							                        </div>
-                                      <div className="form-group">
-                                        <input
-                                          onChange={this.onChange}
-                                          value={this.state.last_name}
-                                          error={errors.last_name}
-                                          id="last_name"
-                                          type="text"
-                                          placeholder="Last Name"
-                                          required
-                                          className={classnames("form-control", {
-                                            invalid: errors.last_name
-                                          })}
-                                        />
-                                      {/*  <span  className="form-control" htmlFor="last-name">Last Name</span>
-                                        <span className="red-text">{errors.last_name}</span> */}
-                                      </div>
-                                </div>
-                            </div>
+                
+                      <div className ="col-md-12 bg-white p-3 border">
+                        
+                          <h5 className="p-2 text-center font-weight-bold">Resume</h5>
 
-                              <div className="row">
-                                  <div className="col-md-12">
-                                    <div className="form-group">
-                                     <div>
-								                         <span className="text-light-black">Email</span>
-							                        </div>
-                                      <input
-                                        onChange={this.onChange}
-                                        value={this.state.email}
-                                        error={errors.email}
-                                        id="email"
-                                        type="email"
-                                        placeholder = "Email"
-                                        email="true"
-                                        required
-                                        className={classnames("form-control", {
-                                          invalid: errors.email
-                                        })}
-                                      />
-                                      {/* <span className="form-group has-feedback" htmlFor="email">Email</span>
-                                      <span className="red-text">{errors.email}</span> */}
-                                    </div>
-                                  </div>
+                                <div className="row">
+                                   <div className="col-md-6">
+                                       <table className="table">
+                                           <tbody>
+                                               <tr>
+                                                  <th>
+                                                     First Name
+                                                  </th>
+                                                  <td>
+                                                     {
+                                                       typeof userDetails != "undefined" &&
+                                                                       userDetails.first_name
+                                                      }
+                                                  </td>    
+                                               </tr>
+                                               <tr>
+                                                  <th>
+                                                     Last Name
+                                                  </th>
+                                                  <td>
+                                                    {  typeof userDetails != "undefined" &&
+                                                                       userDetails.last_name
+                                                    }                  
+                                                  </td>    
+                                               </tr>
+                                               <tr>
+                                                  <th>
+                                                     Email
+                                                  </th>
+                                                  <td>
+                                                    {  typeof userDetails != "undefined" &&
+                                                                       userDetails.email
+                                                    }  
+                                                  </td>    
+                                               </tr>
+                                               <tr>
+                                                  <th>
+                                                     Phone Number
+                                                  </th>
+                                                  <td>
+                                                     {  typeof userDetails != "undefined" &&
+                                                                       userDetails.phone_num
+                                                    }  
+                                                  </td>    
+                                               </tr>
+                                               <tr>
+                                                  <th>
+                                                     Address
+                                                  </th>
+                                                  <td>
+                                                  {  typeof userDetails != "undefined" &&
+                                                                       userDetails.address
+                                                    }  
+                                                  </td>    
+                                               </tr>
+                                           </tbody>  
+                                       </table>  
+                                   </div>
+                                   
+                                        <div className="col-md-6">
+                                                { 
+                                                  typeof userDetails != "undefined" &&
+                                                  <center><img className="card-img-top" src= 
+                                                                                    {
+                                                                                      userDetails.profile_img_file_name ? `${API_URL}/profileImages/${userDetails.profile_img_file_name}` :'images/dummy_pic.png'
+                                                                                     } alt="Card image cap" style={{width:"40%"}}/>
+                                                  </center>                                   
+                                              }
+                                        </div>
+                                   
                                 </div> 
 
-                              <div className="row">
-                                <div className="col-md-12">   
-                                    <div className="form-group has-feedback">
-                                      <div>
-								                         <span className="text-light-black">Phone Number</span>
-							                        </div>
-                                      <input
-                                        onChange={this.onChange}
-                                        value={this.state.phone_num}
-                                        error={errors.phone_num}
-                                        id="phone_num"
-                                        type="phone_num"
-                                        placeholder="Phone Number"
-                                        required
-                                        pattern="^[0-9]+$"
-                                        minLength="1"
-                                        maxLength="10"
-                                        className={classnames("form-control", {
-                                          invalid: errors.phone_num
-                                        })}
-                                      />
-                                      
-                                    </div>
-                                  </div> 
-                                </div>   
-                      
-                      <div className="row">
-                        <div className="col-md-12 text-center p-2">
-                            <button
-                              type="submit"
-                              className="btn btn-primary btn-block btn-flat"
-                            >
-                              Update Profile
-                            </button>
-                          </div> 
-                      </div>
-                    </form>
-                    </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                            <h5 className="p-2 font-weight-bold">Skills</h5>
+                                                  <div className="row">
+                                                        <div className="col-md-12">
+                                                                  <table className="table table-bordered table-striped">
+                                                                      <thead>
+                                                                           <tr className="text-muted text-center">
+                                                                               <th>S.No.</th>
+                                                                               <th>Skill Name</th>
+                                                                           </tr>  
+                                                                      </thead>
+                                                                      <tbody className="text-center">
+                                                                          {skillItems}
+                                                                      </tbody>  
+                                                                   </table>     
+                                                        </div>  
+                                                  </div>  
+                                    </div>  
+                                </div>  
+                                
+                                <div className="row">
+                                    <div className="col-md-12">
+                                            <h5 className="p-2 font-weight-bold">Disabilities</h5>
+                                                  <div className="row">
+                                                        <div className="col-md-12">
+                                                                  <table className="table table-bordered table-striped">
+                                                                      <thead>
+                                                                           <tr className="text-muted text-center">
+                                                                               <th scope="col">S.No.</th>
+                                                                               <th scope="col">Disability Name</th>
+                                                                           </tr>  
+                                                                      </thead>
+                                                                      <tbody className="text-center">
+                                                                          {disabilityItems}
+                                                                      </tbody>  
+                                                                   </table>     
+                                                        </div>  
+                                                  </div>  
+                                    </div>  
+                                </div> 
 
-
-              <div className ="col-md-5 bg-white p-3 border">
-                  <h5 className="p-2" id="profile-user-msg-box" style={{display:'none'}}></h5>  
-                  <h5 className="p-2 text-center font-weight-bold">Profile Image</h5>
-                        
-                          <div className="row">
-                               <div className="col-md-6 mx-auto">
-                                  { <img className="card-img-top" src=  {this.state.profile_img_file_name ? `${API_URL}/profileImages/${this.state.profile_img_file_name}` :'images/dummy_pic.png'} alt="Card image cap"/>}
-                               </div> 
-                            </div>
-                            <div className="row">
-                               <div className="col-md-6 m-auto">
-                                   <h5 className="text-center"><u>{this.state.profile_img_file_name ? this.state.first_name+this.state.last_name :'Dummy Pic'}</u></h5>
-                               </div>
-                            </div>
-                            <form onSubmit={this.onUploadProfilePic}>
-                            <div className="row">
-                              <div className="col-md-12">
-                                <div className="custom-file">
-                                        <input type="file" className="custom-file-input" name="profileImagePath" id="profileImagePath" onChange={this.onChange} value={this.state.profileImagePath}
-                                          error={errors.profileImage} required/>
-                                        <label className="custom-file-label" id="profileImageLabel">Choose file</label>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                            <h5 className="p-2 font-weight-bold">Qualifications</h5>
+                                                  <div className="row">
+                                                        <div className="col-md-12 table-responsive">
+                                                                  <table className="table table-bordered table-striped">
+                                                                      <thead className="text-center">
+                                                                      <tr>
+                                                                          <th scope="col">S.No.</th>
+                                                                          <th scope="col">University</th>
+                                                                          <th scope="col">Degree Level</th>
+                                                                          <th scope="col">Qualification</th>
+                                                                          <th scope="col">Start Date</th>
+                                                                          <th scope="col">End Date</th>
+                                                                        </tr>
+                                                                      </thead>
+                                                                      <tbody className="text-center">
+                                                                          {qualificationItems}
+                                                                      </tbody>  
+                                                                   </table>     
+                                                        </div>  
+                                                  </div>  
+                                    </div>  
                                 </div>
-                              </div>
-                            </div>
-                            
 
-                      <div className="row">
-                        <div className="col-md-12 text-center p-2">
-                            <button
-                              type="submit"
-                              className="btn btn-info btn-flat"
-                            >
-                              Upload Profile Pic
-                            </button>
-                          </div> 
+                                <div className="row">
+                                    <div className="col-md-12">
+                                            <h5 className="p-2 font-weight-bold">Employment Details</h5>
+                                                  <div className="row">
+                                                        <div className="col-md-12 table-responsive">
+                                                                  <table className="table table-bordered table-striped">
+                                                                      <thead>
+                                                                           <tr className="text-muted text-center">
+                                                                          
+                                                                                <th scope="col">S.No.</th>
+                                                                                <th scope="col">Organisation Name</th>
+                                                                                <th scope="col">Designation</th>
+                                                                                <th scope="col">From Period</th>
+                                                                                <th scope="col">To Period</th>
+                                                                              
+                                                                           </tr>  
+                                                                      </thead>
+                                                                      <tbody className="text-center">
+                                                                          {employmentItems}
+                                                                      </tbody>  
+                                                                   </table>     
+                                                        </div>  
+                                                  </div>  
+                                    </div>  
+                                </div>
+
+
                       </div>
-                      </form>
-                    </div>
                 
                 </div>
             </div>
@@ -311,11 +322,14 @@ class ProfileUser extends Component {
   }
 }
 
-ProfileUser.propTypes = {
+MyResume.propTypes = {
   userProfile: PropTypes.func.isRequired,
-  userProfileUpdation:PropTypes.func.isRequired,
-  userProfilePicUpload:PropTypes.func.isRequired,
+  getAllDisabilities: PropTypes.func.isRequired,
+  getAllSkills      : PropTypes.func.isRequired,
+  getAllQualifications      : PropTypes.func.isRequired,
+  getAllEmploymentDetails   : PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  profile : PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   success: PropTypes.object.isRequired
 };
@@ -323,8 +337,12 @@ ProfileUser.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile:state.profile,
+  skills : state.skills,
+  disabilities : state.disabilities,
+  qualifications : state.qualifications,
+  employments : state.employments,
   errors: state.errors,
   success:state.success
 });
 
-export default connect(mapStateToProps,{ userProfile,userProfileUpdation,userProfilePicUpload })(withRouter(ProfileUser));
+export default connect(mapStateToProps,{ userProfile,getAllDisabilities,getAllSkills,getAllQualifications,getAllEmploymentDetails })(withRouter(MyResume));

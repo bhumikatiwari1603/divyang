@@ -27,12 +27,12 @@ class Dashboard extends Component {
 
           <div className="row mt-6">
                
-                  <div class="col-lg-6 col-xs-12">
+                  <div class="col-lg-4 col-xs-12">
                   
                         <div class="small-box bg-success">
                               <div class="inner text-white">
                                     <h3>10</h3>
-                                    <h4>My Active Applications</h4>
+                                    <h4>Current Openings</h4>
                               </div>
                               <div class="icon">
                                     <i class="fa fa-envelope-o"></i>
@@ -41,12 +41,12 @@ class Dashboard extends Component {
                         </div>
                 </div>
 
-                <div class="col-lg-6 col-xs-12">
+                <div class="col-lg-4 col-xs-12">
                   
                         <div class="small-box bg-warning">
                               <div class="inner text-white">
                                     <h3>10</h3>
-                                    <h4>Current Openings</h4>
+                                    <h4>Current Applications</h4>
                               </div>
                               <div class="icon">
                                     <i class="fa fa-tachometer"></i>
@@ -54,6 +54,19 @@ class Dashboard extends Component {
                             <a class="small-box-footer" href="#">More info<i class="fa fa-arrow-circle-right"></i></a> 
                         </div>
                 </div>
+
+                <div class="col-lg-4 col-xs-12">
+                        <div class="small-box bg-info">
+                              <div class="inner text-white">
+                                    <h3>10</h3>
+                                    <h4>Archived Applications</h4>
+                              </div>
+                              <div class="icon">
+                                    <i class="fa fa-tachometer"></i>
+                              </div>
+                            <a class="small-box-footer" href="#">More info<i class="fa fa-arrow-circle-right"></i></a> 
+                        </div>
+                </div> 
 
 
           </div>

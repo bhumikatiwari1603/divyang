@@ -76,7 +76,7 @@ class SkillView extends Component {
                                     <thead>
                                       <tr>
                                         <th scope="col">S.No.</th>
-                                        <th scope="col">skill Name</th>
+                                        <th scope="col">Skill Name</th>
                                         <th scope="col">Action</th>
                                       </tr>
                                     </thead>

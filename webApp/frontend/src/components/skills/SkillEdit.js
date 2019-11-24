@@ -111,7 +111,7 @@ class SkillEdit extends Component {
                                         type="text"
                                         placeholder="Skill Name"
                                         required
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         className={classnames("form-control", {
                                           invalid: errors.name
                                         })}

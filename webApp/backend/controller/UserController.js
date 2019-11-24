@@ -192,7 +192,7 @@ exports.getEmployerProfile = (req,res)=>{
         userModel.findOne({
             where: {
               id: req.payLoad.id,
-              type_of_user : 'owner'
+              type_of_user : 'employer'
             }
           })
           .then(user => {
@@ -222,7 +222,7 @@ exports.getEmployerProfile = (req,res)=>{
 
 //Edit Employer Profile Details
 exports.editEmployerProfile = (req,res)=>{
-    
+    console.log("Request ",req.body);
     req.body.type_of_user = req.payLoad.type_of_user;
 
                 const userData = {
@@ -230,14 +230,14 @@ exports.editEmployerProfile = (req,res)=>{
                     last_name: req.body.last_name,
                     email: req.body.email,
                     phone_num : req.body.phone_num,
-                    address:user.dataValues.address,
-                    company : user.dataValues.company,
-                    orgn_type: user.dataValues.orgn_type
+                    address:req.body.address,
+                    company : req.body.company,
+                    orgn_type: req.body.orgn_type
                   }
             userModel.count({
                 where: {
                 id: req.payLoad.id,
-                type_of_user : 'owner'
+                type_of_user : 'employer'
                 }
             })
             .then(c => {

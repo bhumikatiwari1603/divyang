@@ -11,7 +11,7 @@ class QualificationAdd extends Component {
     this.state = {
       university_name: "",
       degree_level : "",
-      qaualification_name:"",
+      qualification_name:"",
       start_dt: "",
       completion_dt:"",
       errors: {},
@@ -51,13 +51,13 @@ class QualificationAdd extends Component {
       university_name : this.state.university_name,
       degree_level    : this.state.degree_level,
       qualification_name : this.state.qualification_name,
-      start_dt           : this.start_dt,
-      completion_dt      : this.completion_dt
+      start_dt           : this.state.start_dt,
+      completion_dt      : this.state.completion_dt
 
     };
 
 
-    this.props.addDisability(qualificationDetails, this.props.history); 
+    this.props.addQualification(qualificationDetails, this.props.history); 
   
   };
 
@@ -93,7 +93,7 @@ class QualificationAdd extends Component {
                                         id="university_name"
                                         type="text"
                                         placeholder="University Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
@@ -116,7 +116,7 @@ class QualificationAdd extends Component {
                                         id="degree_level"
                                         type="text"
                                         placeholder="Degree Level"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
@@ -136,10 +136,10 @@ class QualificationAdd extends Component {
                                         onChange={this.onChange}
                                         value={this.state.qualification_name}
                                         error={errors.qualification_name}
-                                        id="name"
+                                        id="qualification_name"
                                         type="text"
                                         placeholder="Qualification Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"

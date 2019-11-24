@@ -12,7 +12,7 @@ class QualificationEdit extends Component {
       university_name: "",
       id:"",
       degree_level : "",
-      qaualification_name:"",
+      qualification_name:"",
       start_dt: "",
       completion_dt:"",
       errors: {},
@@ -40,7 +40,7 @@ class QualificationEdit extends Component {
             university_name : item.university_name,
             id   : item.id,
             degree_level: item.degree_level,
-            qualification_name: item.qaualification_name,
+            qualification_name: item.qualification_name,
             start_dt: item.start_dt,
             completion_dt : item.completion_dt
            });
@@ -87,8 +87,8 @@ class QualificationEdit extends Component {
       university_name : this.state.university_name,
       degree_level    : this.state.degree_level,
       qualification_name : this.state.qualification_name,
-      start_dt           : this.start_dt,
-      completion_dt      : this.completion_dt
+      start_dt           : this.state.start_dt,
+      completion_dt      : this.state.completion_dt
 
     };
 
@@ -123,7 +123,7 @@ class QualificationEdit extends Component {
                                         id="name"
                                         type="text"
                                         placeholder="University Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
@@ -146,7 +146,7 @@ class QualificationEdit extends Component {
                                         id="degree_level"
                                         type="text"
                                         placeholder="Degree Level"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
@@ -169,7 +169,7 @@ class QualificationEdit extends Component {
                                         id="name"
                                         type="text"
                                         placeholder="Qualification Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"

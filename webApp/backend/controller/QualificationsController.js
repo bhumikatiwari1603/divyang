@@ -11,7 +11,7 @@ const userQualificationsModel = require('../model/UserQualification');
 
 exports.add = (req, res) => {
     try{
-     
+     console.log("Request....",req);
                 req.body.user_id = req.payLoad.id;           
                 userQualificationsModel.create(req.body)
                         .then(result => {
@@ -56,7 +56,7 @@ exports.getMyQualifications = (req,res)=> {
                 res.status(200).json({error:false,message:"Qualifications...",result:result});
 
         } else {
-           return res.status(400).json({ error:true,message:'SQualifications Not Available...' });
+           return res.status(400).json({ error:true,message:'Qualifications Not Available...' });
         }
       })
       .catch(err => {
@@ -65,9 +65,11 @@ exports.getMyQualifications = (req,res)=> {
 
 }
 
-//Edit User Profile Details
+//Edit Details
 exports.edit = (req,res)=>{
-    
+  console.log("Request....",req.body);
+
+  //req.body.start_dt = new Date(req.body.start_dt);
   userQualificationsModel.count({
             where: {
             id : req.params.id,  

@@ -10,7 +10,7 @@ const sequelize = new Sequelize('disablity_portal', 'root', '', {
             dateStrings: true,
             typeCast: true
       },
-      timezone: '-08:00', //for writing to database
+      //timezone: '-08:00', //for writing to database
   pool: {
     max: 10,
     min: 0,

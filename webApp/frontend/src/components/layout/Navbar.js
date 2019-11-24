@@ -41,6 +41,14 @@ class Navbar extends Component {
                                         <Link className="nav-link text-dark" to="dashboard">Home <span className="sr-only">(current)</span></Link>
                                       }  
                                     </li>
+                                    
+                                    {user.type_of_user=='user' &&
+                                       <li className="nav-item">
+                                             <Link className="nav-link text-success" to="myResume">My Resume <span className="sr-only"></span></Link>
+                                     </li>
+                                    }
+
+
                                     {user.type_of_user=='user' &&
                                        <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -4,7 +4,6 @@ import {
   GET_ERRORS,
   GET_SUCCESS_MSG,
   FETCH_QUALIFICATIONS,
-  FETCH_DISABILITIES,
   RESET_SUCCESS_STATE,
   RESET_ERROR_STATE
 } from "./types";
@@ -13,10 +12,10 @@ import {
 // Get All Sections
 export const getAllQualifications = (history) => dispatch => {
   axios
-    .get("disabilities/myDisabilities")
+    .get("qualifications/myQualifications")
     .then(res => {
                   dispatch({
-                    type: FETCH_DISABILITIES,
+                    type: FETCH_QUALIFICATIONS,
                     payload: res.data
                   })
                   
@@ -42,13 +41,13 @@ export const getAllQualifications = (history) => dispatch => {
 // Add Section
 export const addQualification = (data, history) => dispatch => {
   axios
-    .post("disabilities/disability",data)
+    .post("qualifications/qualification",data)
     .then(res => {
                   dispatch({
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allDisabilities");
+                  history.push("/allQualifications");
                  
                   /* dispatch({
                     type: UPDATED_USER_PROFILE,
@@ -80,13 +79,13 @@ export const addQualification = (data, history) => dispatch => {
 // Update Disability
 export const updateQualification = (data, history) => dispatch => {
   axios
-    .put(`disabilities/disability/${data.id}`,data)
+    .put(`qualifications/qualification/${data.id}`,data)
     .then(res => {
                   dispatch({
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allDisabilities");
+                  history.push("/allQualifications");
                   /*dispatch({
                     type: RESET_ERROR_STATE
                   });*/

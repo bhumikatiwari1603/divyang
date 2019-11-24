@@ -8,6 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/indexRoute');
 var usersRouter = require('./routes/usersRoute');
+var fileHandlingRouter = require('./routes/fileHandlingRoute');
 var disabilitiesRouter = require('./routes/disabilitiesRoute');
 var skillRouter = require('./routes/skillsRoute');
 var qualificationRouter = require('./routes/qualificationsRoute');
@@ -50,6 +51,7 @@ app.use(function(req, res, next) {//http://localhost:3009
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/fileHandling', fileHandlingRouter);
 app.use('/disabilities', disabilitiesRouter);
 app.use('/skills',skillRouter);
 app.use('/qualifications',qualificationRouter);

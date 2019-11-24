@@ -17,7 +17,10 @@ import Login from "./components/auth/Login";
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import DashboardEmployer from "./components/dashboard/DashboardEmployer";
 import ProfileUser from "./components/profile/ProfileUser";
+import ProfileEmployer from "./components/profile/ProfileEmployer";
+import MyResume from "./components/profile/MyResume";
 
 import DisabilityAdd from "./components/disabilities/DisabilityAdd";
 import DisabilityView from "./components/disabilities/DisabilityView";
@@ -69,7 +72,10 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboardEmployer" component={DashboardEmployer} />
               <PrivateRoute exact path="/profileUser" component={ProfileUser} />
+              <PrivateRoute exact path="/profileEmployer" component={ProfileEmployer} />
+              <PrivateRoute exact path="/myResume" component={MyResume} />
 
               <PrivateRoute exact path="/addDisability" component={DisabilityAdd} />
               <PrivateRoute exact path="/allDisabilities" component={DisabilityView} />

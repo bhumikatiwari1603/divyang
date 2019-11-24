@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link, withRouter  } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { userProfile,userProfileUpdation,userProfilePicUpload } from "../../actions/profileActions";
+import { employerProfile,employerProfileUpdation,userProfilePicUpload } from "../../actions/profileActions";
 import classnames from "classnames";
 import {API_URL} from "../../actions/url";
 
-class ProfileUser extends Component {
+class ProfileEmployer extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,13 +17,15 @@ class ProfileUser extends Component {
       phone_num: "",
       selected_file : "",
       address:"",
+      company:"",
+      orgn_type:"",
       errors: {},
       success:{}
     };
   }
   
   componentWillMount(){
-    this.props.userProfile();
+  this.props.employerProfile();
     //console.log("User Details",this.props.profile);
 }
 
@@ -39,6 +41,8 @@ class ProfileUser extends Component {
               profile_img_file_name: userDetails.profile_img_file_name,
               phone_num: userDetails.phone_num, 
               address : userDetails.address,
+              company:userDetails.company,
+              orgn_type:userDetails.orgn_type
       });
     }
 
@@ -110,7 +114,9 @@ class ProfileUser extends Component {
       email: this.state.email,
       profile_img_file_name: this.state.profile_img_file_name,
       phone_num: this.state.phone_num,
-      address  : this.state.address
+      address  : this.state.address,
+      company:this.state.company,
+      orgn_type:this.state.orgn_type
     };
 
     /*this.setState({
@@ -118,8 +124,8 @@ class ProfileUser extends Component {
       errors:{}
     });*/
     
-
-    this.props.userProfileUpdation(userProfileDetails, this.props.history); 
+console.log(userProfileDetails);
+    this.props.employerProfileUpdation(userProfileDetails, this.props.history); 
   
   };
 
@@ -203,6 +209,58 @@ class ProfileUser extends Component {
                                 </div>
                             </div>
 
+                            <div className="row">
+                                <div className="col-md-12">   
+                                    <div className="form-group has-feedback">
+                                      <div>
+								                         <span className="text-light-black">Company Name</span>
+							                        </div>
+                                      <input
+                                        onChange={this.onChange}
+                                        value={this.state.company}
+                                        error={errors.company}
+                                        id="company"
+                                        type="text"
+                                        placeholder="Company Name"
+                                        required
+                                        pattern="^[a-zA-Z\s]+$"
+                                        minLength="1"
+                                        maxLength="15"
+                                        className={classnames("form-control", {
+                                          invalid: errors.company
+                                        })}
+                                      />
+                                      
+                                    </div>
+                                  </div> 
+                                </div>
+                                
+                              <div className="row">
+                                <div className="col-md-12">   
+                                    <div className="form-group has-feedback">
+                                      <div>
+								                         <span className="text-light-black">Organization Type</span>
+							                        </div>
+                                      <input
+                                        onChange={this.onChange}
+                                        value={this.state.orgn_type}
+                                        error={errors.orgn_type}
+                                        id="orgn_type"
+                                        type="text"
+                                        digits="true"
+                                        placeholder="Organization Type"
+                                        required
+                                        maxLength="20"
+                                        className={classnames("form-control", {
+                                          invalid: errors.orgn_type
+                                        })}
+                                      />
+                                      {/* <span className="form-group has-feedback" htmlFor="password">Password</span>
+                                      <span className="red-text">{errors.password}</span> */}
+                                    </div>
+                                  </div> 
+                                </div> 
+
                               <div className="row">
                                   <div className="col-md-12">
                                     <div className="form-group">
@@ -252,8 +310,9 @@ class ProfileUser extends Component {
                                       
                                     </div>
                                   </div> 
-                                </div>  
-                                <div className="row">
+                                </div>
+                                
+                              <div className="row">
                                 <div className="col-md-12">   
                                     <div className="form-group has-feedback">
                                       <div>
@@ -277,7 +336,7 @@ class ProfileUser extends Component {
                                       
                                     </div>
                                   </div> 
-                              </div>  
+                              </div>   
                       
                       <div className="row">
                         <div className="col-md-12 text-center p-2">
@@ -304,7 +363,7 @@ class ProfileUser extends Component {
                             </div>
                             <div className="row">
                                <div className="col-md-6 m-auto">
-                                   <h5 className="text-center"><u>{this.state.profile_img_file_name ? this.state.first_name+this.state.last_name :'Dummy Pic'}</u></h5>
+                                   <h5 className="text-center"><u>{this.state.profile_img_file_name ? this.state.first_name+" "+this.state.last_name :'Dummy Pic'}</u></h5>
                                </div>
                             </div>
                             <form onSubmit={this.onUploadProfilePic}>
@@ -340,9 +399,9 @@ class ProfileUser extends Component {
   }
 }
 
-ProfileUser.propTypes = {
-  userProfile: PropTypes.func.isRequired,
-  userProfileUpdation:PropTypes.func.isRequired,
+ProfileEmployer.propTypes = {
+  employerProfile: PropTypes.func.isRequired,
+  employerProfileUpdation:PropTypes.func.isRequired,
   userProfilePicUpload:PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -356,4 +415,4 @@ const mapStateToProps = state => ({
   success:state.success
 });
 
-export default connect(mapStateToProps,{ userProfile,userProfileUpdation,userProfilePicUpload })(withRouter(ProfileUser));
+export default connect(mapStateToProps,{ employerProfile,employerProfileUpdation,userProfilePicUpload })(withRouter(ProfileEmployer));
