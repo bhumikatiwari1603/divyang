@@ -44,6 +44,8 @@ import OpeningEdit from "./components/openings/OpeningEdit";
 import ArchivedOpeningView from "./components/openings/ArchivedOpeningView";
 import OpeningAll from "./components/openings/OpeningAll";
 
+import MyActiveApplications from "./components/openings/MyActiveApplications";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -104,6 +106,8 @@ class App extends Component {
               <PrivateRoute exact path="/editOpening" component={OpeningEdit} />
               <PrivateRoute exact path="/allArchivedOpenings" component={ArchivedOpeningView} />
               <PrivateRoute exact path="/allOpenings" component={OpeningAll} />
+
+              <PrivateRoute exact path="/myActiveApplications" component={MyActiveApplications} />
 
           </Switch>
         </div>

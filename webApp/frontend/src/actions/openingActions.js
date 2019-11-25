@@ -8,6 +8,8 @@ import {
   FETCH_OPENINGS_COUNT,
   FETCH_CLOSED_OPENINGS_COUNT,
   APPLY_OPENING,
+  MY_ACTIVE_APPLICATIONS_COUNT,
+  MY_ACTIVE_APPLICATIONS,
   RESET_SUCCESS_STATE,
   RESET_ERROR_STATE
 } from "./types";
@@ -281,6 +283,65 @@ export const apply = (openingId, history) => dispatch => {
         dispatch({
           type: RESET_SUCCESS_STATE
         });
+    }
+    );
+};
+
+
+// Get My Active Applications
+export const getMyActiveApplications = (history) => dispatch => {
+  axios
+    .get("openings/myActiveApplications")
+    .then(res => {
+                  dispatch({
+                    type: MY_ACTIVE_APPLICATIONS,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
+    }
+    );
+};
+
+// myActiveApplications Count
+export const getMyActiveApplicationsCount = (history) => dispatch => {
+  axios
+    .get("openings/myActiveApplicationsCount")
+    .then(res => {
+                  dispatch({
+                    type: MY_ACTIVE_APPLICATIONS_COUNT,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
     }
     );
 };

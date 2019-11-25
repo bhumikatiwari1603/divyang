@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { getAllOpeningsCount} from "../../actions/openingActions";
+import { getAllOpeningsCount, getMyActiveApplicationsCount} from "../../actions/openingActions";
 import './Dashboard.scss';
 
 class Dashboard extends Component {
@@ -10,6 +10,7 @@ class Dashboard extends Component {
   componentWillMount(){
 
     this.props.getAllOpeningsCount();
+    this.props.getMyActiveApplicationsCount();
   }
 
     onLogoutClick = e => {
@@ -22,6 +23,11 @@ class Dashboard extends Component {
 
       let openingsCount =0;
       openingsCount = this.props.openingsCount.result;
+
+      let myActiveApplicationsCount = 0;
+               myActiveApplicationsCount = this.props.myActiveApplicationsCount.result;
+
+      console.log("MyActibbdb ", myActiveApplicationsCount);         
       
       return (
         <div style={{ height: "75vh" }} className="container valign-wrapper">
@@ -41,13 +47,13 @@ class Dashboard extends Component {
                   
                         <div class="small-box bg-success">
                               <div class="inner text-white">
-                                    <h3>10</h3>
+                                     <h3>{myActiveApplicationsCount}</h3>
                                     <h4>My Active Applications</h4>
                               </div>
                               <div class="icon">
                                     <i class="fa fa-envelope-o"></i>
                               </div>
-                            <a class="small-box-footer" href="#">More info<i class="fa fa-arrow-circle-right"></i></a> 
+                            <a class="small-box-footer" href="/myActiveApplications">More info<i class="fa fa-arrow-circle-right"></i></a> 
                         </div>
                 </div>
 
@@ -75,17 +81,19 @@ class Dashboard extends Component {
   }
   
   Dashboard.propTypes = {
-    getAllOpeningsCount : PropTypes.func.isRequired, 
+    getAllOpeningsCount : PropTypes.func.isRequired,
+    getMyActiveApplicationsCount :  PropTypes.func.isRequired,
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
   };
   
   const mapStateToProps = state => ({
     auth: state.auth,
-    openingsCount:state.openingsCount
+    openingsCount:state.openingsCount,
+    myActiveApplicationsCount : state.myActiveApplicationsCount
   });
   
   export default connect(
     mapStateToProps,
-    { logoutUser,getAllOpeningsCount }
+    { logoutUser,getAllOpeningsCount, getMyActiveApplicationsCount }
   )(Dashboard);

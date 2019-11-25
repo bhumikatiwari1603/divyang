@@ -270,4 +270,65 @@ return res.status(500).send({ error: true,message:e.message});
 
 }
 
+//User
+exports.myActiveApplicationsCount = (req, res) => {
 
+  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+
+    openingModel.count({
+                /*where : {
+                        job_status : 'open'
+                        },*/
+                        include : [
+                          {
+                          model:userApplicationModel,
+                          where :{
+                            user_id: {
+                                      [Op.eq]:req.payLoad.id
+                                      }
+                            }
+                        } 
+                      ]
+                  })
+                  .then(result =>{
+
+                    return res.send({ error: false,message:"My Active Applications...",result:result })
+                  
+                  })
+                  .catch(err => {
+                    //res.end('error: ' + err)
+                    return res.status(500).send({ error: true,message:err });
+                });
+
+}
+
+exports.myActiveApplications = (req, res) => {
+
+  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+
+    openingModel.findAll({
+                /*where : {
+                        job_status : 'open'
+                        },*/
+                        include : [
+                          {
+                          model:userApplicationModel,
+                          where :{
+                            user_id: {
+                                      [Op.eq]:req.payLoad.id
+                                      }
+                            }
+                        } 
+                      ]
+                  })
+                  .then(result =>{
+
+                    return res.send({ error: false,message:"My Active Applications...",result:result })
+                  
+                  })
+                  .catch(err => {
+                    //res.end('error: ' + err)
+                    return res.status(500).send({ error: true,message:err });
+                });
+
+}
