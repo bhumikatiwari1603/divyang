@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getAllOpenings} from "../../actions/openingActions";
+import { getAllOpenings,apply} from "../../actions/openingActions";
 
 class OpeningAll extends Component {
   constructor() {
@@ -15,7 +15,6 @@ class OpeningAll extends Component {
   }
   
   componentWillMount(){
-    console.log("Openings All");
     this.props.getAllOpenings();
  }
 
@@ -44,7 +43,20 @@ class OpeningAll extends Component {
       document.getElementById('msg-box').style.display="none";
     }
 
+    if (Object.keys(nextProps.appliedData).length!=0) {
+      
+      document.getElementById('msg-box').style.display="block";
+      document.getElementById('msg-box').className = 'alert-success';
+      document.getElementById('msg-box').innerHTML    = nextProps.appliedData.message;
+      
+      document.getElementById('opening-row-'+nextProps.appliedData.openingId).remove();
 
+    }
+
+  }
+
+  onClick = e =>{
+    this.props.apply(e.target.id);
   }
 
   render() {
@@ -60,6 +72,9 @@ class OpeningAll extends Component {
           <td>{item.job_location}</td>
           <td>{item.skills_required}</td>
           <td>{item.closing_dt}</td>
+          <td>
+          <button id={item.id} type="button" className="btn btn-sm btn-primary" onClick={this.onClick}>Apply</button>
+          </td>
       </tr>
    ));
   
@@ -84,6 +99,7 @@ class OpeningAll extends Component {
                                         <th scope="col">Job Location</th>
                                         <th scope="col">Skills Required</th>
                                         <th scope="col">Closing Date</th>
+                                        <th scope="col">Apply</th>
                                       </tr>
                                     </thead>
                                     <tbody id="openings-list">
@@ -103,6 +119,7 @@ class OpeningAll extends Component {
 
 OpeningAll.propTypes = {
   getAllOpenings: PropTypes.func.isRequired,
+  apply : PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   success: PropTypes.object.isRequired
@@ -112,7 +129,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
   success:state.success,
-  openings:state.openings
+  openings:state.openings,
+  appliedData:state.appliedData
 });
 
-export default connect(mapStateToProps,{ getAllOpenings })(withRouter(OpeningAll));
+export default connect(mapStateToProps,{ getAllOpenings,apply })(withRouter(OpeningAll));

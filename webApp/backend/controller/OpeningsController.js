@@ -1,8 +1,9 @@
 'use strict'
 var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 const openingModel = require('../model/Opening');
-
+const userApplicationModel = require('../model/UserApplication');
 
 
 
@@ -183,11 +184,23 @@ console.log("Resuly ",result);
 //For User
 
 exports.getAllOpenedOpenings = (req, res) => {
-  console.log("Hello Body", req.body);
+  
+  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+  
   openingModel.findAll({
                             where : {
                                     job_status : 'open'
-                                    }
+                                    },
+                            include : [
+                                       {
+                                        model:userApplicationModel,
+                                        where :{
+                                          user_id: {
+                                                    [Op.ne]:req.payLoad.id
+                                                   }
+                                         }
+                                      } 
+                                      ]       
                               })
                               .then(result =>{
 
@@ -203,19 +216,58 @@ exports.getAllOpenedOpenings = (req, res) => {
 
 exports.getAllOpenedOpeningsCount = (req, res) => {
 
-openingModel.count({
-            where : {
-                    job_status : 'open'
-                    }
-              })
-              .then(result =>{
+  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+    openingModel.count({
+                where : {
+                        job_status : 'open'
+                        },
+                        include : [
+                          {
+                          model:userApplicationModel,
+                          where :{
+                            user_id: {
+                                      [Op.ne]:req.payLoad.id
+                                      }
+                            }
+                        } 
+                      ]
+                  })
+                  .then(result =>{
 
-                return res.send({ error: false,message:"Openings...",result:result })
+                    return res.send({ error: false,message:"Openings...",result:result })
+                  
+                  })
+                  .catch(err => {
+                    //res.end('error: ' + err)
+                    return res.status(500).send({ error: true,message:err });
+                });
+
+}
+
+
+//Apply
+exports.apply = (req,res)=>{
+    
+  try{
+     
+    req.params.user_id = req.payLoad.id;
+    req.params.opening_id = req.params.openingId;
+
+    userApplicationModel.create(req.params)
+            .then(result => {
+
+              return res.status(200).send({error:false,message:"Applied Successfully...",openingId:req.params.openingId});   
               
-              })
-              .catch(err => {
+            })
+            .catch(err => {
                 //res.end('error: ' + err)
                 return res.status(500).send({ error: true,message:err });
             });
+        
+}catch(e){
+return res.status(500).send({ error: true,message:e.message});
+}
 
 }
+
+

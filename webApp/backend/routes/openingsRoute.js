@@ -29,4 +29,7 @@ router.get('/allOpenings',middleware.verifyToken,openingsController.getAllOpened
 //All Opened openings count
 router.get('/allOpeningsCount',middleware.verifyToken,openingsController.getAllOpenedOpeningsCount);
 
+//delete
+router.get('/apply/:openingId',middleware.verifyToken, openingsController.apply);
+
 module.exports = router;

@@ -12,7 +12,7 @@ import closedOpeningCountReducer from "./closedOpeningCountReducer";
 import errorReducer from "./errorReducer";
 import successReducer from "./successReducer";
 import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../actions/types";
-
+import applyReducer from "./applyReducer";
 
 const appReducer = combineReducers({
   auth: authReducer,
@@ -25,6 +25,7 @@ const appReducer = combineReducers({
   closedOpenings : closedOpeningReducer,
   openingsCount : openingCountReducer,
   closedOpeningsCount : closedOpeningCountReducer,
+  appliedData : applyReducer,
   errors: errorReducer,
   success: successReducer
 });

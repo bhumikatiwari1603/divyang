@@ -7,6 +7,7 @@ import {
   FETCH_CLOSED_OPENINGS,
   FETCH_OPENINGS_COUNT,
   FETCH_CLOSED_OPENINGS_COUNT,
+  APPLY_OPENING,
   RESET_SUCCESS_STATE,
   RESET_ERROR_STATE
 } from "./types";
@@ -254,6 +255,32 @@ export const getAllOpeningsCount = (history) => dispatch => {
       dispatch({
         type: RESET_SUCCESS_STATE
       });
+    }
+    );
+};
+
+// Apply
+export const apply = (openingId, history) => dispatch => {
+  axios
+    .get(`openings/apply/${openingId}`)
+    .then(res => {
+                  dispatch({
+                    type: APPLY_OPENING,
+                    payload: res.data
+                  })
+                  
+                }
+         ) 
+    .catch(err => 
+      { 
+          dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+
+        dispatch({
+          type: RESET_SUCCESS_STATE
+        });
     }
     );
 };
