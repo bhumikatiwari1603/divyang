@@ -17,6 +17,10 @@ import applyReducer from "./applyReducer";
 import myActiveApplicationReducer from "./myActiveApplicationReducer";
 import myActiveApplicationCountReducer from "./myActiveApplicationCountReducer";
 
+import userApplicationReducer from "./userApplicationReducer";
+import userApplicationCountReducer from "./userApplicationCountReducer";
+
+
 const appReducer = combineReducers({
   auth: authReducer,
   profile:profileReducer,
@@ -31,6 +35,8 @@ const appReducer = combineReducers({
   myActiveApplications: myActiveApplicationReducer,
   myActiveApplicationsCount : myActiveApplicationCountReducer,
   appliedData : applyReducer,
+  userApplications : userApplicationReducer,
+  userApplicationsCount : userApplicationCountReducer,
   errors: errorReducer,
   success: successReducer
 });

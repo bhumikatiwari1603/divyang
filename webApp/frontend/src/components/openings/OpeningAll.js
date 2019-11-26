@@ -56,16 +56,29 @@ class OpeningAll extends Component {
   }
 
   onClick = e =>{
-    this.props.apply(e.target.id);
+  
+    let answer = window.confirm("Are you sure, you want to apply?")
+    
+    if (answer) {
+      this.props.apply(e.target.id);
+    }
+
+
+    
   }
 
   render() {
     const { errors } = this.state;
+    const { user } = this.props.auth;
+    
     let openingItems;
     if((this.props.openings).hasOwnProperty('result')){
       
-      openingItems = this.props.openings.result.map((item,index)=>(
-      <tr key ={item.id} id={"opening-row-"+item.id}>
+      openingItems = this.props.openings.result.map((item,index)=>{ 
+
+        let alreadyApplied = false;
+
+      return <tr key ={item.id} id={"opening-row-"+item.id}>
           <td>{index+1}</td>
           <td>{item.job_title}</td>
           <td>{item.job_descr}</td>
@@ -73,11 +86,23 @@ class OpeningAll extends Component {
           <td>{item.skills_required}</td>
           <td>{item.closing_dt}</td>
           <td>
-          <button id={item.id} type="button" className="btn btn-sm btn-primary" onClick={this.onClick}>Apply</button>
+          { 
+              item.user_applications.length>0 &&
+                   item.user_applications.map((appl,index)=>{
+                       
+                       if(user.id==appl.user_id)
+                              alreadyApplied =true;
+                                        
+                   })
+          }
+                 
+             {
+               alreadyApplied ? <p id={item.id} className="btn btn-sm btn-success" >Applied</p>:<button id={item.id} type="button" className="btn btn-sm btn-primary" onClick={this.onClick}>Apply</button> 
+             }
+
           </td>
       </tr>
-   ));
-  
+      });
   }
 
     return (

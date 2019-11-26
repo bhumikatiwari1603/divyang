@@ -27,7 +27,6 @@ class Dashboard extends Component {
       let myActiveApplicationsCount = 0;
                myActiveApplicationsCount = this.props.myActiveApplicationsCount.result;
 
-      console.log("MyActibbdb ", myActiveApplicationsCount);         
       
       return (
         <div style={{ height: "75vh" }} className="container valign-wrapper">

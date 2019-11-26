@@ -74,7 +74,7 @@ class OpeningView extends Component {
                 <div className="row">
                   
                      <div className ="col-md-8 mx-auto bg-white p-3 border">
-                     <h5 className="p-2 font-weight-bold text-primary">Job Openings</h5>
+                     <h5 className="p-2 font-weight-bold text-primary">My Current Job Openings</h5>
                            <div className="table-responsive">
                                <table className="table table-bordered text-center">
                                     <thead>

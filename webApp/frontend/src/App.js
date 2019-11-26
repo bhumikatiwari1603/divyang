@@ -46,6 +46,8 @@ import OpeningAll from "./components/openings/OpeningAll";
 
 import MyActiveApplications from "./components/openings/MyActiveApplications";
 
+import UserApplications from "./components/openings/UserApplications";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -108,6 +110,8 @@ class App extends Component {
               <PrivateRoute exact path="/allOpenings" component={OpeningAll} />
 
               <PrivateRoute exact path="/myActiveApplications" component={MyActiveApplications} />
+
+              <PrivateRoute exact path="/userApplications" component={UserApplications} />
 
           </Switch>
         </div>

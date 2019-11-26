@@ -4,6 +4,12 @@ const Op = Sequelize.Op;
 
 const openingModel = require('../model/Opening');
 const userApplicationModel = require('../model/UserApplication');
+const userModel = require('../model/User');
+const userSkillsModel = require('../model/UserSkills');
+const userDisabilityModel = require('../model/UserDisability');
+const userQualificationModel = require('../model/UserQualification');
+const userEmploymentsModel = require('../model/UserEmployments');
+
 
 
 
@@ -185,20 +191,20 @@ console.log("Resuly ",result);
 
 exports.getAllOpenedOpenings = (req, res) => {
   
-  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+ openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
   
   openingModel.findAll({
                             where : {
-                                    job_status : 'open'
+                                    job_status : 'open',
                                     },
                             include : [
                                        {
                                         model:userApplicationModel,
-                                        where :{
+                                        /*where :{
                                           user_id: {
                                                     [Op.ne]:req.payLoad.id
                                                    }
-                                         }
+                                         }*/
                                       } 
                                       ]       
                               })
@@ -216,12 +222,12 @@ exports.getAllOpenedOpenings = (req, res) => {
 
 exports.getAllOpenedOpeningsCount = (req, res) => {
 
-  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+  //openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
     openingModel.count({
                 where : {
                         job_status : 'open'
                         },
-                        include : [
+                        /*include : [
                           {
                           model:userApplicationModel,
                           where :{
@@ -230,11 +236,11 @@ exports.getAllOpenedOpeningsCount = (req, res) => {
                                       }
                             }
                         } 
-                      ]
+                      ]*/
                   })
                   .then(result =>{
 
-                    return res.send({ error: false,message:"Openings...",result:result })
+                    return res.send({ error: false,message:"Openings Count...",result:result })
                   
                   })
                   .catch(err => {
@@ -324,6 +330,86 @@ exports.myActiveApplications = (req, res) => {
                   .then(result =>{
 
                     return res.send({ error: false,message:"My Active Applications...",result:result })
+                  
+                  })
+                  .catch(err => {
+                    //res.end('error: ' + err)
+                    return res.status(500).send({ error: true,message:err });
+                });
+
+}
+
+
+//Applications for my created Openings
+exports.myUserApplications = (req, res) => {
+
+  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+  userApplicationModel.belongsTo(userModel,{foreignKey:'user_id'});
+  userModel.hasMany(userDisabilityModel,{foreignKey:'user_id'});
+  userModel.hasMany(userSkillsModel,{foreignKey:'user_id'});
+  userModel.hasMany(userQualificationModel,{foreignKey:'user_id'});
+  //userModel.hasMany(userEmploymentsModel,{foreignKey:'user_id'});
+
+    openingModel.findAll({
+                where : {
+                        user_id : req.payLoad.id
+                        },
+                        include : [
+                          {
+                          model:userApplicationModel,
+                          include : [
+                                  {
+                                    model: userModel,
+                                    attributes:['id','first_name','last_name','email','phone_num'],
+                                    include : [
+                                      {
+                                        model: userDisabilityModel,
+                                        //attributes:['id','first_name','last_name','email','phone_num']
+                                    },
+                                    {
+                                      model: userSkillsModel,
+                                      //attributes:['id','first_name','last_name','email','phone_num']
+                                    },
+                                    {
+                                      model: userQualificationModel,
+                                      //attributes:['id','first_name','last_name','email','phone_num']
+                                    }
+                                 ] 
+                                }
+                             ] 
+                        } 
+                      ]
+                  })
+                  .then(result =>{
+
+                    return res.send({ error: false,message:"Applications for My Openings...",result:result })
+                  
+                  })
+                  .catch(err => {
+                    //res.end('error: ' + err)
+                    return res.status(500).send({ error: true,message:err });
+                });
+
+}
+
+//Applications for my created Openings
+exports.myUserApplicationsCount = (req, res) => {
+
+  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+
+    openingModel.count({
+                where : {
+                        user_id : req.payLoad.id
+                        },
+                        include : [
+                          {
+                          model:userApplicationModel 
+                        } 
+                      ]
+                  })
+                  .then(result =>{
+
+                    return res.send({ error: false,message:"Applications Count for My Openings...",result:result })
                   
                   })
                   .catch(err => {

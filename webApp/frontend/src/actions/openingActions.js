@@ -10,6 +10,8 @@ import {
   APPLY_OPENING,
   MY_ACTIVE_APPLICATIONS_COUNT,
   MY_ACTIVE_APPLICATIONS,
+  USER_APPLICATIONS,
+  USER_APPLICATIONS_COUNT,
   RESET_SUCCESS_STATE,
   RESET_ERROR_STATE
 } from "./types";
@@ -144,7 +146,7 @@ export const addOpening = (data, history) => dispatch => {
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allOpenings");
+                  history.push("/myAllOpenings");
                  
                   /* dispatch({
                     type: UPDATED_USER_PROFILE,
@@ -182,7 +184,7 @@ export const updateMyOpening = (data, history) => dispatch => {
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allOpenings");
+                  history.push("/myAllOpenings");
                   /*dispatch({
                     type: RESET_ERROR_STATE
                   });*/
@@ -324,6 +326,64 @@ export const getMyActiveApplicationsCount = (history) => dispatch => {
     .then(res => {
                   dispatch({
                     type: MY_ACTIVE_APPLICATIONS_COUNT,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
+    }
+    );
+};
+
+// Get User Applications
+export const getUserApplications = (history) => dispatch => {
+  axios
+    .get("openings/myUserApplications")
+    .then(res => {
+                  dispatch({
+                    type: USER_APPLICATIONS,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
+    }
+    );
+};
+
+// User Applications Count
+export const getUserApplicationsCount = (history) => dispatch => {
+  axios
+    .get("openings/myUserApplicationsCount")
+    .then(res => {
+                  dispatch({
+                    type: USER_APPLICATIONS_COUNT,
                     payload: res.data
                   })
                   

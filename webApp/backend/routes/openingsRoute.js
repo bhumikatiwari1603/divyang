@@ -38,5 +38,11 @@ router.get('/myActiveApplications',middleware.verifyToken,openingsController.myA
 //My Active Applications count
 router.get('/myActiveApplicationsCount',middleware.verifyToken,openingsController.myActiveApplicationsCount);
 
+//My User Applications
+router.get('/myUserApplications',middleware.verifyToken,openingsController.myUserApplications);
+
+//My User Applications count
+router.get('/myUserApplicationsCount',middleware.verifyToken,openingsController.myUserApplicationsCount);
+
 
 module.exports = router;
