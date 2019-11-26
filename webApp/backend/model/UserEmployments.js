@@ -13,23 +13,20 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER(9),
       required: true
     },
-    university_name: {
+    orgn_name: {
       type: Sequelize.STRING(100),
       required: true
     },
-    degree_level: {
+    designation: {
       type: Sequelize.STRING(100),
       required: true
     },
-    qualification_name: {
-      type: Sequelize.STRING(100),
-      required: true
-    },
-    start_dt: {
+    
+    from_period: {
       type: Sequelize.DATE,
       required: true
     },
-    completion_dt: {
+    to_period: {
       type: Sequelize.DATE,
       required: true
     },
