@@ -360,7 +360,7 @@ exports.myUserApplications = (req, res) => {
                           include : [
                                   {
                                     model: userModel,
-                                    attributes:['id','first_name','last_name','email','phone_num'],
+                                    attributes:['id','first_name','last_name','email','phone_num','address','profile_img_file_name'],
                                     include : [
                                       {
                                         model: userDisabilityModel,
