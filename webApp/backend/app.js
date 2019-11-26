@@ -13,6 +13,7 @@ var disabilitiesRouter = require('./routes/disabilitiesRoute');
 var skillRouter = require('./routes/skillsRoute');
 var qualificationRouter = require('./routes/qualificationsRoute');
 var openingsRouter = require('./routes/openingsRoute');
+var employmentRouter = require('./routes/employmentRoute');
 
 var app = express();
 
@@ -57,6 +58,7 @@ app.use('/disabilities', disabilitiesRouter);
 app.use('/skills',skillRouter);
 app.use('/qualifications',qualificationRouter);
 app.use('/openings',openingsRouter);
+app.use('/employments',employmentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
