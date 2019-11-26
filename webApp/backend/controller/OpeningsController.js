@@ -393,7 +393,7 @@ exports.myUserApplications = (req, res) => {
 }
 
 //Applications for my created Openings
-exports.myUserApplicationsCount = (req, res) => {
+/*exports.myUserApplicationsCount = (req, res) => {
 
   openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
 
@@ -404,6 +404,32 @@ exports.myUserApplicationsCount = (req, res) => {
                         include : [
                           {
                           model:userApplicationModel 
+                        } 
+                      ]
+                  })
+                  .then(result =>{
+
+                    return res.send({ error: false,message:"Applications Count for My Openings...",result:result })
+                  
+                  })
+                  .catch(err => {
+                    //res.end('error: ' + err)
+                    return res.status(500).send({ error: true,message:err });
+                });
+
+}*/
+
+exports.myUserApplicationsCount = (req, res) => {
+
+  userApplicationModel.belongsTo(openingModel,{foreignKey:'opening_id'});
+
+    userApplicationModel.count({
+                where : {
+                         '$opening.user_id$' : req.payLoad.id
+                        },
+                        include : [
+                          {
+                          model:openingModel 
                         } 
                       ]
                   })
