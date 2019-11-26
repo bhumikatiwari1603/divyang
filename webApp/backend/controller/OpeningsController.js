@@ -259,7 +259,81 @@ exports.apply = (req,res)=>{
     req.params.user_id = req.payLoad.id;
     req.params.opening_id = req.params.openingId;
 
-    userApplicationModel.create(req.params)
+    //disability count
+    userDisabilityModel.count({
+       where : {
+                user_id : req.payLoad.id
+              },             
+        })
+        .then(c =>{
+
+          if(c>0){
+
+                    userSkillsModel.count({
+                      where : {
+                              user_id : req.payLoad.id
+                            },             
+                      })
+                      .then(c =>{
+              
+                        if(c>0){
+              
+                                  userQualificationModel.count({
+                                    where : {
+                                            user_id : req.payLoad.id
+                                          },             
+                                    })
+                                    .then(c =>{
+                            
+                                                  if(c>0){
+                                        
+                                                    userApplicationModel.create(req.params)
+                                                    .then(result => {
+                                        
+                                                      return res.status(200).send({error:false,message:"Applied Successfully...",openingId:req.params.openingId});   
+                                                      
+                                                    })
+                                                    .catch(err => {
+                                                        //res.end('error: ' + err)
+                                                        return res.status(500).send({ error: true,message:err });
+                                                    });
+                                        
+                                        
+                                                  }else{
+                                                    return res.status(500).send({ error: true,message:"Qualifications Should be Added before Applying..." });
+                                                  }
+                                    
+                                    })
+                                    .catch(err => {
+                                      //res.end('error: ' + err)
+                                      return res.status(500).send({ error: true,message:err });
+                                  });
+                                
+              
+              
+                        }
+                        else{
+                          return res.status(500).send({ error: true,message:"Skills Should be Added before Applying..." });
+                        }
+                      
+                      })
+                      .catch(err => {
+                        //res.end('error: ' + err)
+                        return res.status(500).send({ error: true,message:err });
+                    });
+
+
+          }else{
+            return res.status(500).send({ error: true,message:"Disabilities Should be Added before Applying..." });
+          }
+        
+        })
+        .catch(err => {
+          //res.end('error: ' + err)
+          return res.status(500).send({ error: true,message:err });
+      });
+
+    /*userApplicationModel.create(req.params)
             .then(result => {
 
               return res.status(200).send({error:false,message:"Applied Successfully...",openingId:req.params.openingId});   
@@ -268,11 +342,11 @@ exports.apply = (req,res)=>{
             .catch(err => {
                 //res.end('error: ' + err)
                 return res.status(500).send({ error: true,message:err });
-            });
+            });*/
         
-}catch(e){
-return res.status(500).send({ error: true,message:e.message});
-}
+      }catch(e){
+      return res.status(500).send({ error: true,message:e.message});
+    }
 
 }
 
