@@ -15,22 +15,11 @@ print("In app")
 def login():
     userid = request.form['userid']
     id_user =int(userid)
-    df = get_job_id(getrecommendations(id_user))
-    print(df.head())
-
-def getrecommendations(userid):
-    sim_scores = list(enumerate(cosine_sim[userid]))
+    sim_scores = list(enumerate(cosine_sim[id_user]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     user_indices = [i[0] for i in sim_scores]
-    return user_indices[0:20]
-    
-def get_job_id(usrid_list):
-    jobs_userwise = apps['UserID'].isin(usrid_list) #
-    df1 = pd.DataFrame(data = apps[jobs_userwise], columns=['JobID'])
-    joblist = df1['JobID'].tolist()
-    Job_list = jobs['JobID'].isin(joblist)
-    df = pd.DataFrame(data = jobs[Job_list], columns=['JobID','Title','Description','City','State'])
-    return df
+    return jsonify(user_indices[0:20])
+
 
 if __name__ == '__main__':
     app.run(debug=True)
