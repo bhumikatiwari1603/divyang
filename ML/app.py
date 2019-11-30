@@ -17,7 +17,7 @@ def login():
     userid = request.form['userid']
     id_user =int(userid)
     df = get_job_id(getrecommendations(id_user))
-    
+
     return df.to_dict(orient='index')
     #print(df.head())
 
