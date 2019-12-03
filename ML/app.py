@@ -12,10 +12,10 @@ indices_id = pd.Series(users.index, index=users['UserID'])
 app = Flask(__name__)   # create the application instance
 print("In app")
  
-@app.route('/index', methods=['POST'])
+@app.route('/index', methods=['GET'])
 def login():
-    print(request.form)
-    userid = request.form['userid']
+    
+    userid = request.args.get('user_id')
     id_user =int(userid)
     df = get_job_id(getrecommendations(id_user))
 
