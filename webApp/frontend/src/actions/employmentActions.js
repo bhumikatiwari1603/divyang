@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   GET_ERRORS,
   GET_SUCCESS_MSG,
-  FETCH_DISABILITIES,
   FETCH_EMPLOYMENT_DETAILS,
   RESET_SUCCESS_STATE,
   RESET_ERROR_STATE
@@ -13,10 +12,10 @@ import {
 // Get All Employment
 export const getAllEmploymentDetails = (history) => dispatch => {
   axios
-    .get("disabilities/myDisabilities")
+    .get("employments/myEmployments")
     .then(res => {
                   dispatch({
-                    type: FETCH_DISABILITIES,
+                    type: FETCH_EMPLOYMENT_DETAILS,
                     payload: res.data
                   })
                   
@@ -39,16 +38,16 @@ export const getAllEmploymentDetails = (history) => dispatch => {
     );
 };
 
-// Add Section
+// Add
 export const addEmploymentDetail = (data, history) => dispatch => {
   axios
-    .post("disabilities/disability",data)
+    .post("employments/employment",data)
     .then(res => {
                   dispatch({
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allDisabilities");
+                  history.push("/allEmployments");
                  
                   /* dispatch({
                     type: UPDATED_USER_PROFILE,
@@ -77,16 +76,16 @@ export const addEmploymentDetail = (data, history) => dispatch => {
 
 
 
-// Update Disability
+// Update Employment
 export const updateEmploymentDetail = (data, history) => dispatch => {
   axios
-    .put(`disabilities/disability/${data.id}`,data)
+    .put(`employments/employment/${data.id}`,data)
     .then(res => {
                   dispatch({
                     type: GET_SUCCESS_MSG,
                     payload: res.data
                   })
-                  history.push("/allDisabilities");
+                  history.push("/allEmployments");
                   /*dispatch({
                     type: RESET_ERROR_STATE
                   });*/

@@ -10,6 +10,11 @@ const userDisabilityModel = require('../model/UserDisability');
 const userQualificationModel = require('../model/UserQualification');
 const userEmploymentsModel = require('../model/UserEmployments');
 
+var Request = require("request");
+
+const got = require('got');
+
+
 
 
 
@@ -517,4 +522,74 @@ exports.myUserApplicationsCount = (req, res) => {
                     return res.status(500).send({ error: true,message:err });
                 });
 
+}
+
+const server = 'http://localhost:5000';
+let fixedHeaders = {
+    'json': true,
+    'Content-Type': 'application/json; charset=utf-8',
+    'user-agent': 'ciphertrick-server'
+}
+
+exports.getAllRecommendedJobs = (req, res) => {
+                            try{
+                            
+                              Request.get(`http://localhost:5000/index?user_id=${req.payLoad.id}`, (error, response, body) => {
+                              if(error) {
+                                  return console.log("Error form ML ",error);
+                              }
+                              
+                              var result = JSON.parse(body.replace(/\bNaN\b/g, "null"));
+                              
+                              return res.send({ error: false,message:"Recommended Jobs....",resultSize:Object.entries(result).length,result: Object.entries(result)});  
+                              
+                          });
+                            
+                              /*Request.post({
+                              "headers": { "content-type": "application/json" },
+                              "url": "http://localhost:5000/index",
+                              "body": JSON.stringify({
+                                  'userid': '47'
+                              })
+                          }, (error, response, body) => {
+                              if(error) {
+                                  return console.dir(error);
+                              }
+                              console.dir(JSON.parse(body));
+                          });*/  
+                          
+                          
+
+                        }catch(e){
+                          console.log("Exception ",e);
+                        }
+
+}
+
+
+module.exports.addUser = async function(user1){
+  try {
+      const user = await this.callapi(`/index`, 'post', user1, {});
+  } catch(e){
+      console.log(e);
+  }
+};
+
+module.exports.callapi =(path, method, body = {}, newheaders ={})=>{
+  const url = server + path;
+  let headers = Object.assign(fixedHeaders, newheaders);
+  const options = {
+      body: JSON.stringify(body),
+      headers: headers
+  }
+  return got[method](url, options).then((data)=>{
+      if(typeof data.body === 'string'){ //expecting data to be json object
+          return JSON.parse(data.body);
+      }
+      return data.body;
+  })
+  .catch((err)=>{
+       console.log("Error in request Handler",err);
+      //logger.error(`[request Handler]`, err);
+  });
 }

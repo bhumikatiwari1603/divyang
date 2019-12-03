@@ -47,6 +47,7 @@ import OpeningAll from "./components/openings/OpeningAll";
 import MyActiveApplications from "./components/openings/MyActiveApplications";
 
 import UserApplications from "./components/openings/UserApplications";
+import AllRecommendedJobs from './components/openings/AllRecommendedJobs';
 
 
 // Check for token to keep user logged in
@@ -108,6 +109,8 @@ class App extends Component {
               <PrivateRoute exact path="/editOpening" component={OpeningEdit} />
               <PrivateRoute exact path="/allArchivedOpenings" component={ArchivedOpeningView} />
               <PrivateRoute exact path="/allOpenings" component={OpeningAll} />
+
+              <PrivateRoute exact path="/allRecommendedJobs" component={AllRecommendedJobs} />
 
               <PrivateRoute exact path="/myActiveApplications" component={MyActiveApplications} />
 

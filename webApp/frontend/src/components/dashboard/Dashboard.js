@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { getAllOpeningsCount, getMyActiveApplicationsCount} from "../../actions/openingActions";
+import { getAllOpeningsCount, getMyActiveApplicationsCount,getAllRecommendedJobs} from "../../actions/openingActions";
 import './Dashboard.scss';
 
 class Dashboard extends Component {
@@ -11,6 +11,7 @@ class Dashboard extends Component {
 
     this.props.getAllOpeningsCount();
     this.props.getMyActiveApplicationsCount();
+    this.props.getAllRecommendedJobs();
   }
 
     onLogoutClick = e => {
@@ -27,6 +28,9 @@ class Dashboard extends Component {
       let myActiveApplicationsCount = 0;
                myActiveApplicationsCount = this.props.myActiveApplicationsCount.result;
 
+      let recommendedJobsCount = 0;
+               recommendedJobsCount = this.props.recommendedJobs.resultSize;         
+
       
       return (
         <div style={{ height: "75vh" }} className="container valign-wrapper">
@@ -42,7 +46,7 @@ class Dashboard extends Component {
 
           <div className="row mt-6">
                
-                  <div class="col-lg-6 col-xs-12">
+                  <div class="col-lg-4 col-xs-12">
                   
                         <div class="small-box bg-success">
                               <div class="inner text-white">
@@ -56,12 +60,12 @@ class Dashboard extends Component {
                         </div>
                 </div>
 
-                <div class="col-lg-6 col-xs-12">
+                <div class="col-lg-4 col-xs-12">
                   
                         <div class="small-box bg-warning">
                               <div class="inner text-white">
                                  <h3>{openingsCount}</h3>
-                                    <h4>Current Openings</h4>
+                                    <h4>Current Openings(In -house)</h4>
                               </div>
                               <div class="icon">
                                     <i class="fa fa-tachometer"></i>
@@ -70,6 +74,19 @@ class Dashboard extends Component {
                         </div>
                 </div>
 
+                <div class="col-lg-4 col-xs-12">
+                  
+                  <div class="small-box bg-danger">
+                        <div class="inner text-white">
+                           <h3>{recommendedJobsCount}</h3>
+                              <h4>Recommended Openings</h4>
+                        </div>
+                        <div class="icon">
+                              <i class="fa fa-tachometer"></i>
+                        </div>
+                      <a class="small-box-footer" href="allRecommendedJobs">More info<i class="fa fa-arrow-circle-right"></i></a> 
+                  </div>
+               </div>
 
           </div>
 
@@ -82,6 +99,7 @@ class Dashboard extends Component {
   Dashboard.propTypes = {
     getAllOpeningsCount : PropTypes.func.isRequired,
     getMyActiveApplicationsCount :  PropTypes.func.isRequired,
+    getAllRecommendedJobs        :  PropTypes.func.isRequired,
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
   };
@@ -89,10 +107,11 @@ class Dashboard extends Component {
   const mapStateToProps = state => ({
     auth: state.auth,
     openingsCount:state.openingsCount,
-    myActiveApplicationsCount : state.myActiveApplicationsCount
+    myActiveApplicationsCount : state.myActiveApplicationsCount,
+    recommendedJobs : state.recommendedJobs
   });
   
   export default connect(
     mapStateToProps,
-    { logoutUser,getAllOpeningsCount, getMyActiveApplicationsCount }
+    { logoutUser,getAllOpeningsCount, getMyActiveApplicationsCount, getAllRecommendedJobs}
   )(Dashboard);

@@ -13,6 +13,7 @@ import {
   USER_APPLICATIONS,
   USER_APPLICATIONS_COUNT,
   RESET_SUCCESS_STATE,
+  RECOMMENDED_JOBS,
   RESET_ERROR_STATE
 } from "./types";
 
@@ -384,6 +385,35 @@ export const getUserApplicationsCount = (history) => dispatch => {
     .then(res => {
                   dispatch({
                     type: USER_APPLICATIONS_COUNT,
+                    payload: res.data
+                  })
+                  
+                  /*dispatch({
+                    type: RESET_ERROR_STATE
+                  });*/
+                }
+         )
+    .catch(err => 
+      { 
+        dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+      
+      dispatch({
+        type: RESET_SUCCESS_STATE
+      });
+    }
+    );
+};
+
+// Get All My Opened Openings
+export const getAllRecommendedJobs = (history) => dispatch => {
+  axios
+    .get("openings/allRecommendedJobs")
+    .then(res => {
+                  dispatch({
+                    type: RECOMMENDED_JOBS,
                     payload: res.data
                   })
                   

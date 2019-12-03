@@ -73,7 +73,7 @@ exports.getMyEmployement = (req,res)=>{
 
 //Edit User Profile Details
 exports.edit = (req,res)=>{
-        
+
     userEmploymentModel.count({
                 where: {
                 id : req.params.id,  

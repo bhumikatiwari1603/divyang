@@ -45,4 +45,8 @@ router.get('/myUserApplications',middleware.verifyToken,openingsController.myUse
 router.get('/myUserApplicationsCount',middleware.verifyToken,openingsController.myUserApplicationsCount);
 
 
+//All Recommended Jobs
+router.get('/allRecommendedJobs',middleware.verifyToken,openingsController.getAllRecommendedJobs);
+
+
 module.exports = router;

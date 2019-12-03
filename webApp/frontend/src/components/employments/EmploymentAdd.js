@@ -88,15 +88,15 @@ class EmploymentAdd extends Component {
                                         onChange={this.onChange}
                                         value={this.state.orgn_name}
                                         error={errors.orgn_name}
-                                        id="name"
+                                        id="orgn_name"
                                         type="text"
                                         placeholder="Organisation Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
                                         className={classnames("form-control", {
-                                          invalid: errors.name
+                                          invalid: errors.orgn_name
                                         })}
                                       />
                                     </div>

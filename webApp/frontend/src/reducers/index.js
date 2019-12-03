@@ -13,6 +13,7 @@ import errorReducer from "./errorReducer";
 import successReducer from "./successReducer";
 import { RESET_ALL_STATE,RESET_SUCCESS_STATE ,RESET_ERROR_STATE} from "../actions/types";
 import applyReducer from "./applyReducer";
+import recommendedJobReducer from "./recommendedJobReducer";
 
 import myActiveApplicationReducer from "./myActiveApplicationReducer";
 import myActiveApplicationCountReducer from "./myActiveApplicationCountReducer";
@@ -37,6 +38,7 @@ const appReducer = combineReducers({
   appliedData : applyReducer,
   userApplications : userApplicationReducer,
   userApplicationsCount : userApplicationCountReducer,
+  recommendedJobs       : recommendedJobReducer,
   errors: errorReducer,
   success: successReducer
 });

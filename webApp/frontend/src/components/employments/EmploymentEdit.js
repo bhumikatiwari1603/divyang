@@ -84,7 +84,7 @@ class EmploymentEdit extends Component {
       orgn_name : this.state.orgn_name,
       designation    : this.state.designation,
       from_period : this.state.from_period,
-      to_period   : this.to_period
+      to_period   : this.state.to_period
     };
 
     this.props.updateEmploymentDetail(employmentDetails, this.props.history); 
@@ -115,15 +115,15 @@ class EmploymentEdit extends Component {
                                         onChange={this.onChange}
                                         value={this.state.orgn_name}
                                         error={errors.orgn_name}
-                                        id="name"
+                                        id="orgn_name"
                                         type="text"
                                         placeholder="Organisation Name"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
                                         className={classnames("form-control", {
-                                          invalid: errors.name
+                                          invalid: errors.orgn_name
                                         })}
                                       />
                                     </div>
@@ -141,7 +141,7 @@ class EmploymentEdit extends Component {
                                         id="designation"
                                         type="text"
                                         placeholder="Designation"
-                                        pattern="^[a-zA-Z]+$"
+                                        pattern="^[a-zA-Z\s]+$"
                                         required
                                         minLength="1"
                                         maxLength="20"
