@@ -21,6 +21,26 @@ __Architecture:__
 
 __Technology Stack:__ Node JS,Express, OAuth, OLTP, MySQL, React, Express, Machine Learning, Natural Language Processing,MongoDB, IBMBluemix,Kafka,CSS 
 
+__Design Thinking:__
 
+## Employer
+
+Who: Employer organisation hiring representative 
+
+What: Can post job openings for disabled people and monitor the postings made till date
+
+Wow: Rich database of disabled candidates only who possess a wide variety of skillsets suited for a diverse range of job roles.
+
+![](Images/Employer.png)
+
+## Jobseeker with disability condition
+
+Who: Jobseeker with disability condition 
+
+What: Can view, search and apply to jobs targeted for disabled candidates specifically
+
+Wow: Job postings for disabled people specifically makes it a rich source of job pool. System recommended jobs add to the value so that the jobseeker doesn't miss out on any relevant job postings.
+
+![](Images/JobseekerWithDisability.png)
 
 
