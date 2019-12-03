@@ -1,13 +1,14 @@
-from __future__ import print_function  # In python 2.
 import pandas as pd
 from flask import Flask, request, g, redirect, url_for, render_template,jsonify
 from joblib import load
 
-cosine_sim = load('model_clf.joblib') 
-user_based_approach =pd.read_csv('user_based_approach.csv', encoding ='utf-8')
+model_nn = load('model_nn.joblib') 
+users =pd.read_csv('users.csv', encoding ='utf-8')
 apps =pd.read_csv('application.csv', encoding ='utf-8')
 jobs =pd.read_csv('jobs.csv', encoding ='utf-8')
-user_based_approach = user_based_approach.reset_index()
+users = users.reset_index()
+userid = users['UserID']
+indices_id = pd.Series(users.index, index=users['UserID'])
 app = Flask(__name__)   # create the application instance
 print("In app")
  
@@ -22,11 +23,9 @@ def login():
     #print(df.head())
 
 def getrecommendations(userid):
-    sim_scores = list(enumerate(cosine_sim[userid]))
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    user_indices = [i[0] for i in sim_scores]
+    idx = indices_id[userid]
+    return model_nn[idx][1:]
     #print(user_indices)
-    return user_indices[0:20]
     
 def get_job_id(usrid_list):
     jobs_userwise = apps.loc[apps['UserID'].isin(usrid_list)]
