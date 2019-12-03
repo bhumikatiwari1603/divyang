@@ -1,10 +1,12 @@
 ## ProjectGroup-6
 #### Team Members </br> 1. Anurag Patro </br> 2. Bhumika Tiwari </br> 3. Hetal Shah </br> 4. Narisht Dhyani
 
+------------------------------------------------------------------------------------------------------------------------------
 
 ### Divyang - Hiring portal for people with disabilities  (india specific)
 
-__ABSTRACT__
+ABSTRACT
+--------
 
 __Problem Statement:__ 
 People with disabilities (PWD) face lot of challenges in their day to day life. One of the biggest challenges they face is employment. The average employment rate of PWD in India is 0.28 percent in the private sector and 0.54 percent in the public sector. Findings of the World Bank Report ‘People with Disabilities in India: From Commitments to Outcomes’ released in 2007, suggest that the employment rate of disabled people has actually fallen from 42.7% in 1991 down to 37.6 % in 2002. The International Labour Organization (ILO)'s 2011 report 'Persons with Disability and The India Labour Market: Challenges and Opportunities' states that 73.6% of the disabled in India are still outside the labour force.
@@ -22,8 +24,10 @@ __Architecture:__
 
 __Technology Stack:__ Node JS,Express, OAuth, OLTP, MySQL, React, Express, Machine Learning, Natural Language Processing,MongoDB, IBMBluemix,Kafka,CSS 
 
+------------------------------------------------------------------------------------------------------------------------------
 
-__DESIGN THINKING__
+DESIGN THINKING
+---------------
 
 __Employer:__
 
