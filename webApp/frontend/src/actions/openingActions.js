@@ -207,9 +207,13 @@ export const updateMyOpening = (data, history) => dispatch => {
 
 //For User
 // Get All Opened Openings
-export const getAllOpenings = (history) => dispatch => {
+export const getAllOpenings = (searchKeyword,history) => dispatch => {
+  
+  if(searchKeyword=="")
+            searchKeyword= "All"
+            
   axios
-    .get("openings/allOpenings")
+    .get(`openings/allOpenings/${searchKeyword}`)
     .then(res => {
                   dispatch({
                     type: FETCH_OPENINGS,

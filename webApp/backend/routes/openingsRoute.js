@@ -24,7 +24,7 @@ router.get('/myClosedOpeningsCount',middleware.verifyToken,openingsController.ge
 
 
 //All Opened openings
-router.get('/allOpenings',middleware.verifyToken,openingsController.getAllOpenedOpenings);
+router.get('/allOpenings/:searchKeyword',middleware.verifyToken,openingsController.getAllOpenedOpenings);
 
 //All Opened openings count
 router.get('/allOpeningsCount',middleware.verifyToken,openingsController.getAllOpenedOpeningsCount);

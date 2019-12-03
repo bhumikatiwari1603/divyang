@@ -9,13 +9,15 @@ class OpeningAll extends Component {
     super();
     this.state = {
       openingId: "",
+      opening_name : "All",
+      listening    : false,
       errors: {},
       success:{}
     };
   }
   
   componentWillMount(){
-    this.props.getAllOpenings();
+    this.props.getAllOpenings(this.state.opening_name);
  }
 
 
@@ -67,6 +69,41 @@ class OpeningAll extends Component {
     
   }
 
+  onChange = e => {
+  
+    this.setState({ [e.target.id]: e.target.value });
+  
+  };
+
+  onSearchClick = e =>{
+  
+    e.preventDefault();
+    
+    if(this.state.opening_name=="")
+            this.setState({ opening_name:"All" });
+
+    this.props.getAllOpenings(this.state.opening_name);
+
+  }
+
+  speech() {
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    const recognition = new window.SpeechRecognition();
+    recognition.interimResults = true;
+    //recognition.maxAlternatives = 100;
+    recognition.continuous = true;
+        recognition.onresult = (event) => {
+        this.setState({
+          opening_name: event.results[0][0].transcript,
+           listening: false
+        })
+    }
+    recognition.start();
+    this.setState({
+        listening: true
+    })
+}
+
   render() {
     const { errors } = this.state;
     const { user } = this.props.auth;
@@ -114,6 +151,18 @@ class OpeningAll extends Component {
                   
                      <div className ="col-md-8 mx-auto bg-white p-3 border">
                      <h5 className="p-2 font-weight-bold text-primary">Job Openings</h5>
+
+                           <div className="input-group mb-3">
+                              <input type="text" className="form-control transparent-input" placeholder="Search Job Title" aria-label="Search Job Title" aria-describedby="basic-addon2" value={this.state.opening_name} onChange={this.onChange}  error={errors.opening_name} id="opening_name" />
+                              <div className="input-group-append">
+                                <span className="input-group-text" id="basic-addon2"><button className="btn btn-primary btn-block" onClick={this.onSearchClick}>Search</button></span>
+                                <button class="fas fa-microphone  t-icon" style={this.state.listening ? {color:"red"} : {color:"white"}} onClick={() => this.speech()}></button>
+                                
+                              </div>
+                            </div>
+                     
+
+
                            <div className="table-responsive">
                                <table className="table table-bordered text-center">
                                     <thead>

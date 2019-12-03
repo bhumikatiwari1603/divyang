@@ -197,11 +197,25 @@ console.log("Resuly ",result);
 exports.getAllOpenedOpenings = (req, res) => {
   
  openingModel.hasMany(userApplicationModel,{foreignKey:'opening_id'});
+
+ console.log("Search Keyword ", req.params.searchKeyword);
+
+ let condition={};
+
+ condition = {job_status : 'open'}
+
+ if(req.params.searchKeyword != "All"){
+
+  condition = {
+                job_title : {
+                              [Op.like]: `%${req.params.searchKeyword}%`
+                            }
+              }
+    
+}
   
   openingModel.findAll({
-                            where : {
-                                    job_status : 'open',
-                                    },
+                            where : condition,
                             include : [
                                        {
                                         model:userApplicationModel,
@@ -567,7 +581,7 @@ exports.getAllRecommendedJobs = (req, res) => {
 }
 
 
-module.exports.addUser = async function(user1){
+/*module.exports.addUser = async function(user1){
   try {
       const user = await this.callapi(`/index`, 'post', user1, {});
   } catch(e){
@@ -592,4 +606,4 @@ module.exports.callapi =(path, method, body = {}, newheaders ={})=>{
        console.log("Error in request Handler",err);
       //logger.error(`[request Handler]`, err);
   });
-}
+}*/

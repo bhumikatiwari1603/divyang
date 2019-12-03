@@ -71,7 +71,15 @@ class AllRecommendedJobs extends Component {
     
     }
     
-    let openingItems;
+    let openingItems, paginationList=[];
+
+    /*for(let i=0;i<this.props.recommendedJobs.resultSize;i++) {
+      paginationList.push(<li class="page-item" key={i}><button class="page-link" openingName={this.props.recommendedJobs.result[i][0]} onClick={this.onPaginationClick} pageNum={i+1}>{i+1}</button></li>)
+    }*/
+    
+
+
+
     if((this.props.recommendedJobs).hasOwnProperty('result')){
       
       openingItems = this.props.recommendedJobs.result.map((item,index)=>{ 
@@ -115,7 +123,14 @@ class AllRecommendedJobs extends Component {
                                     <tbody id="openings-list">
                                         {openingItems}
                                           
-                                    </tbody>      
+                                    </tbody> 
+                                    <tfoot>
+                                    <nav aria-label="pagination">
+                                                  <ul class="pagination justify-content-end">
+                                                     {paginationList}
+                                                  </ul>
+                                              </nav>
+                                    </tfoot>     
                                </table>
                            </div>
                     </div>                
