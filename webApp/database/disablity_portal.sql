@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 26, 2019 at 09:00 PM
+-- Generation Time: Dec 03, 2019 at 07:05 AM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.4
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `user_employments` (
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_on` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_employments`
@@ -172,7 +172,8 @@ CREATE TABLE IF NOT EXISTS `user_employments` (
 
 INSERT INTO `user_employments` (`id`, `user_id`, `orgn_name`, `designation`, `from_period`, `to_period`, `created_on`, `updated_on`) VALUES
 (1, 63, 'ABC Systems Pvt. Ltd.', 'Assistant', '2017-10-22', '2019-11-22', '2019-11-22 20:23:13', NULL),
-(2, 63, 'XYZ Pvt. Ltd.', 'OA', '2015-10-22', '2017-10-21', '2019-11-22 20:23:13', NULL);
+(2, 63, 'XYZ Pvt. Ltd.', 'OA', '2015-10-22', '2017-10-21', '2019-11-22 20:23:13', NULL),
+(3, 63, 'Dummy Employ', 'ABC', '2014-12-11', '2015-12-16', '2019-12-03 00:19:27', '2019-12-03 00:25:01');
 
 -- --------------------------------------------------------
 
