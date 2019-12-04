@@ -19,7 +19,7 @@ help. We at Divyang, provide a job portal specifically targeting people with dis
 
 
 __Architecture:__
-![](Images/Architecture.png)
+![](Images/Screen Shot 2019-12-03 at 7.11.35 PM.png)
 
 
 __Technology Stack:__ Node JS,Express, OAuth, OLTP, MySQL, React, Express, Machine Learning, Natural Language Processing,MongoDB, IBMBluemix,Kafka,CSS 
