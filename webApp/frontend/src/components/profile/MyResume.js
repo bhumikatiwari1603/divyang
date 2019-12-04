@@ -126,8 +126,6 @@ class MyResume extends Component {
           <td>{item.from_period}</td>
           <td>{item.to_period}</td>
 
-          <td><Link to={{pathname:"/editEmployment",employmentId:item.id}} ><button className="btn btn-sm btn-primary edit">Edit</button></Link>&nbsp;
-          </td>
       </tr>
    ));
   
@@ -299,6 +297,7 @@ class MyResume extends Component {
                                                                                 <th scope="col">Designation</th>
                                                                                 <th scope="col">From Period</th>
                                                                                 <th scope="col">To Period</th>
+                                                                                
                                                                               
                                                                            </tr>  
                                                                       </thead>

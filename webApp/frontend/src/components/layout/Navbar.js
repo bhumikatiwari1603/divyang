@@ -26,8 +26,8 @@ class Navbar extends Component {
     
     return (
             
-              <nav className="navbar navbar-expand-lg navbar-dark bg-white border">
-                <a href="/login"> <h3 className="font-weight-bold text-secondary text-muted font-italic"> divyang</h3></a>
+              <nav className="navbar navbar-expand-lg navbar-dark u-black">
+                <a href="/login"> <h3 className="font-weight-bold text-white font-italic"> divyang</h3></a>
                   {Object.keys(user).length!=0 &&
                    
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,10 +35,10 @@ class Navbar extends Component {
                             <ul className="navbar-nav ml-auto">
                                     <li className="nav-item active">
                                       {user.type_of_user=='employer' &&
-                                        <Link className="nav-link text-dark" to="dashboardEmployer">Home <span className="sr-only">(current)</span></Link>
+                                        <Link className="nav-link text-white" to="dashboardEmployer">Home <span className="sr-only">(current)</span></Link>
                                       }
                                       {user.type_of_user=='user' &&
-                                        <Link className="nav-link text-dark" to="dashboard">Home <span className="sr-only">(current)</span></Link>
+                                        <Link className="nav-link text-white" to="dashboard">Home <span className="sr-only">(current)</span></Link>
                                       }  
                                     </li>
                                     
@@ -51,7 +51,7 @@ class Navbar extends Component {
 
                                     {user.type_of_user=='user' &&
                                        <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Disabilities
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
@@ -62,7 +62,7 @@ class Navbar extends Component {
                                     }
                                     {user.type_of_user=='user' &&
                                        <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Skills
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
@@ -73,7 +73,7 @@ class Navbar extends Component {
                                     }
                                     {user.type_of_user=='user' &&
                                        <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Qualifications
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
@@ -84,7 +84,7 @@ class Navbar extends Component {
                                     }
                                     {user.type_of_user=='user' &&
                                        <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Employment
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
@@ -96,7 +96,7 @@ class Navbar extends Component {
 
                                   {user.type_of_user=='employer' &&
                                        <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Job Openings
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">   
@@ -107,7 +107,7 @@ class Navbar extends Component {
                                     }
 
                                   <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Hi,{user.first_name}!
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

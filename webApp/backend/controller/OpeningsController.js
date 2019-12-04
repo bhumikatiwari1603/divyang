@@ -548,7 +548,7 @@ let fixedHeaders = {
 exports.getAllRecommendedJobs = (req, res) => {
                             try{
                             
-                              Request.get(`http://localhost:5000/index?user_id=${req.payLoad.id}`, (error, response, body) => {
+                              Request.get(`http://18.188.67.177:5000/index?user_id=${req.payLoad.id}`, (error, response, body) => {
                               if(error) {
                                   return console.log("Error form ML ",error);
                               }
