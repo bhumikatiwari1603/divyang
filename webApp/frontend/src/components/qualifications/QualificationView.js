@@ -75,7 +75,7 @@ class QualificationView extends Component {
                 <div className="row">
                   
                      <div className ="col-md-8 mx-auto bg-white p-3 border">
-                     <h5 className="p-2 font-weight-bold text-primary">Qulaifications</h5>
+                     <h5 className="p-2 font-weight-bold text-primary">Qualifications</h5>
                            <div className="table-responsive">
                                <table className="table table-bordered text-center">
                                     <thead>
